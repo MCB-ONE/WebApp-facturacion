@@ -1,4 +1,24 @@
+using BussinesLogic.Data;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
+
+
+// 1. Declaración de los dBContext
+
+// 1.2 Añadir DBcontex para la seguridad
+builder.Services.AddDbContext<SecurityDbContext>(options =>
+{
+    options.UseSqlServer(builder.Configuration.GetConnectionString("SecurityConnection"));
+});
+
+// 1.3. Añadir DBcontext por defecto 
+//builder.Services.AddDbContext<ApiDbContext>(options =>
+//{
+//    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+//});
+
+
 
 // Add services to the container.
 
