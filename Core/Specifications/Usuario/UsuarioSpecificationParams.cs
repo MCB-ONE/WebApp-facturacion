@@ -13,10 +13,10 @@ namespace Core.Specifications.Usuario
      */
     public class UsuarioSpecificationParams
     {
-        public string Nombre { get; set; }
-        public string Apellido { get; set; }
-        public string Email { get; set; }
-        public string Sort { get; set; }
+        public string? Nombre { get; set; }
+        public string? Apellido { get; set; }
+        public string? Email { get; set; }
+        public string? Sort { get; set; }
         public int PageIndex { get; set; } = 1;
 
         private const int MaxPageSize = 50;
@@ -28,7 +28,7 @@ namespace Core.Specifications.Usuario
             set => _pageSize = (value > MaxPageSize) ? MaxPageSize : value;
         }
 
-        public string Search { get; set; }
+        public string? Search { get; set; }
 
     }
 }
