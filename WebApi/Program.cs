@@ -123,6 +123,9 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+//9.1 Habilitar cors
+app.UseCors("CorsPolicity");
+
 app.UseHttpsRedirection();
 
 // 3.2 Añadir el servicio de autenticación
