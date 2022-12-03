@@ -1,0 +1,48 @@
+﻿[
+  {
+    "EmailUsuario": "usuario.test@gmail.com",
+    "Nombre": "Empresa Test",
+    "NIF": "43007288E",
+    "Logo": null,
+    "Calle": "Calle Córcega",
+    "Numero": 12,
+    "CodigoPostal": "08030",
+    "Ciudad": "Barcelona",
+    "Provincia": "Barcelona",
+    "Pais": "España",
+    "Telefono": 937486622,
+    "Email": "empresa.test@gmail.com",
+    "IsDeleted": false,
+    "isActive": true
+  },
+  {
+    "EmailUsuario": "usuario.test@gmail.com",
+    "Nombre": "Empresa Test 2",
+    "NIF": "87256011R",
+    "Logo": null,
+    "Calle": "Calle Puerto Rico",
+    "Numero": 1,
+    "CodigoPostal": "08020",
+    "Ciudad": "Barcelona",
+    "Provincia": "Barcelona",
+    "Pais": "España",
+    "Telefono": 938220099,
+    "Email": "empresa.test2@gmail.com",
+    "IsDeleted": false
+  },
+  {
+    "EmailUsuario": "usuario.test@gmail.com",
+    "Nombre": "Empresa Test 3",
+    "NIF": "77896300E",
+    "Logo": null,
+    "Calle": "Calle del Lamento",
+    "Numero": 30,
+    "CodigoPostal": "08012",
+    "Ciudad": "Barcelona",
+    "Provincia": "Barcelona",
+    "Pais": "España",
+    "Telefono": 930003156,
+    "Email": "empresa.test3@gmail.com",
+    "IsDeleted": false
+  }
+]

@@ -24,11 +24,11 @@ builder.Services.AddDbContext<SecurityDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("SecurityConnection"));
 });
 
-// 1.3. Añadir DBcontext por defecto 
-//builder.Services.AddDbContext<ApiDbContext>(options =>
-//{
-//    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
-//});
+//1.3.Añadir DBcontext por defecto 
+builder.Services.AddDbContext<ApiDbContext>(options =>
+{
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+});
 
 // 2. Generar builder para servicio de Identity y configurarlo para poder gestionar la seguridad
 var identityBuilder = builder.Services.AddIdentityCore<Usuario>();
@@ -152,9 +152,9 @@ async void RunMigration()
         await SecurityDbContextData.SeedUserAsync(userManager, roleManager);
 
         // Seeding data inicial de las tablas de entidades no relacionadas con la seguridad
-        //var apiContext = serviceScope.ServiceProvider.GetRequiredService<ApiDbContext>();
-        //await apiContext.Database.MigrateAsync();
-        //await ApiDbContextData.SeedDataAsync(apiContext, loggerFactory);
+        var apiContext = serviceScope.ServiceProvider.GetRequiredService<ApiDbContext>();
+        await apiContext.Database.MigrateAsync();
+        await ApiDbContextData.SeedDataAsync(apiContext, loggerFactory);
 
 
     }
