@@ -8,7 +8,7 @@ namespace Core.Specifications
 {
     public class SpecificationParams
     {
-        public string Sort { get; set; }
+        public string? Sort { get; set; }
 
         public int PageIndex { get; set; } = 1;
 
@@ -21,6 +21,6 @@ namespace Core.Specifications
             set => _pageSize = (value > MaxPageSize) ? MaxPageSize : value;
         }
 
-        public string Search { get; set; }
+        public string? Search { get; set; }
     }
 }

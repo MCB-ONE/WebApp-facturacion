@@ -10,6 +10,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using System.Text.Json.Serialization;
+using WebApi.Dtos.EmpresaDtos;
+using WebApi.Dtos.FacturaDtos;
 using WebApi.Dtos.UsuarioDtos;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -78,7 +80,7 @@ builder.Services.AddSingleton<ISystemClock, SystemClock>();
 builder.Services.AddControllers();
 
 
-// 7. Añadir politica de autorización
+// 5.1. Añadir politica de autorización
 builder.Services.AddAuthorization(options =>
 {
     options.AddPolicy("UserOnlyPolicy", policy => policy.RequireClaim("UserOnly", "User1"));
@@ -95,16 +97,19 @@ builder.Services.AddCors(options =>
     });
 });
 
-// 6 Servicio automapper
+// Servicio automapper
 builder.Services.AddAutoMapper(typeof(UsuarioMappingProfile));
-
+builder.Services.AddAutoMapper(typeof(EmpresaMappingProfile));
+builder.Services.AddAutoMapper(typeof(FacturaMappingProfile));
 
 // Configuramos los controladores para que ignoren los posibles ciclos de entidades anidadas/ relacionadas
 builder.Services.AddControllers().AddJsonOptions(options =>
     options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
 
-//8. Añadir repositorio de seguridad
+//Añadir repositorios
 builder.Services.AddScoped(typeof(IGenericSecurityRepository<>), typeof(GenericSecurityRepository<>));
+builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+builder.Services.AddScoped(typeof(IEmpresaRepository), typeof(EmpresaRepository));
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -131,6 +136,7 @@ app.UseHttpsRedirection();
 // 3.2 Añadir el servicio de autenticación
 app.UseAuthentication();
 
+// 3.3 Añadir el servicio de authorizacion
 app.UseAuthorization();
 
 app.MapControllers();
