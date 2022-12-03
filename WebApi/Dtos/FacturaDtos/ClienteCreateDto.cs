@@ -1,6 +1,6 @@
 ﻿namespace WebApi.Dtos.FacturaDtos
 {
-    public class ClienteDto
+    public class ClienteCreateDto
     {
         public string Nombre { get; set; }
         public string NIF { get; set; }

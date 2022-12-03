@@ -110,6 +110,7 @@ builder.Services.AddControllers().AddJsonOptions(options =>
 builder.Services.AddScoped(typeof(IGenericSecurityRepository<>), typeof(GenericSecurityRepository<>));
 builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
 builder.Services.AddScoped(typeof(IEmpresaRepository), typeof(EmpresaRepository));
+builder.Services.AddScoped(typeof(IFacturaRepository), typeof(FacturaRepository));
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

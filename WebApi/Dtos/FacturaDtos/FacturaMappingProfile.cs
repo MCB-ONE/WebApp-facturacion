@@ -9,6 +9,9 @@ namespace WebApi.Dtos.FacturaDtos
         {
             CreateMap<Factura, FacturaDto>().ReverseMap();
             CreateMap<Cliente, ClienteDto>().ReverseMap();
+            CreateMap<Factura, FacturaCreateDto>().ReverseMap();
+            CreateMap<Cliente, ClienteCreateDto>().ReverseMap();
+            CreateMap<LineaFactura, LineasFacturaCreateDto>().ReverseMap();
 
         }
     }

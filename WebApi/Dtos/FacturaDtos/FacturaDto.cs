@@ -5,7 +5,7 @@ namespace WebApi.Dtos.FacturaDtos
 {
     public class FacturaDto
     {
-
+        public int Id { get; set; }
         public int Numero { get; set; }
         public DateTimeOffset FechaExpedicion { get; set; }
         public decimal Subtotal { get; set; }
