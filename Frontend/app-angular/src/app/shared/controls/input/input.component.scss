@@ -1,0 +1,6 @@
+@import '../../../../styles/colors.scss';
+:host-context(.form-field_error){
+  input{
+    border-bottom: 2px solid $error;
+  }
+}
