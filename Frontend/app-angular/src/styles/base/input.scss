@@ -1,0 +1,17 @@
+@import '../colors.scss';
+
+.app-input{
+  width: 100%;
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px solid $primary;
+  border-radius: 8px 8px 0px 0px;
+  margin-bottom: 1rem;
+  padding: 12px 6px;
+  outline: none;
+  background: $base;
+  &:focus{
+    border: none;
+    border-bottom: 1px solid $primary-dark;
+  }
+}

@@ -1,0 +1,14 @@
+.app-button {
+  background-color: $primary;
+  color: $on-primary;
+  padding: 8px 25px;
+  margin: 0 0.5rem 1rem;
+  border-radius: 2px;
+  font-weight: 600;
+  text-transform: uppercase;
+  &:hover,
+  &:focus {
+    transition: background-color 0.1s linear;
+    background-color: $primary-dark;
+  }
+}
