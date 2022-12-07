@@ -1,0 +1,9 @@
+<app-header [isAuthorized] = "isAuthorized$ | async" [usuario]="usuario$ | async" (signOut)="onSignOut()"></app-header>
+<mat-drawer-container>
+  <mat-drawer mode="side" opened>
+    <app-menu-list [menuItems]="menuItems"></app-menu-list>
+  </mat-drawer>
+  <mat-drawer-content>
+    <router-outlet></router-outlet>
+  </mat-drawer-content>
+</mat-drawer-container>

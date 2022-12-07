@@ -1,3 +1,4 @@
+import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -15,6 +16,7 @@ import { environment } from 'environments/environment';
 import { NotificationModule } from './services';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './auth-interceptor';
+
 
 
 
@@ -38,6 +40,7 @@ const APP_DATE_FORMATS: MatDateFormats = {
   imports: [
     BrowserModule,
     AppRoutingModule,
+    RouterModule,
     BrowserAnimationsModule,
     HttpClientModule,
 
