@@ -13,6 +13,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { HeaderComponent } from './components/header/header.component';
 import { MenuListComponent } from './components/menu-list/menu-list.component';
+import { ActiveModule } from '@app/store/empresa/active/active.module';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { MenuListComponent } from './components/menu-list/menu-list.component';
     MatButtonModule,
     MatSidenavModule,
     MatIconModule,
-    MatListModule
+    MatListModule,
+    ActiveModule
   ]
 })
 export class DashboardModule { }

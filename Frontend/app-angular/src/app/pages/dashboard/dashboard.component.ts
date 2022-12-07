@@ -1,3 +1,4 @@
+import { ActiveActions } from './../../store/empresa/active/active.actions';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { select, Store } from '@ngrx/store';
@@ -25,7 +26,6 @@ export class DashboardComponent implements OnInit {
 
   usuario$ !: Observable<fromUsuario.UsuarioResponse>;
   isAuthorized$ !: Observable<boolean>
-  empresasLoading$ !: Observable<boolean | null>;
   params = new HttpParams();
 
   constructor(
@@ -39,6 +39,7 @@ export class DashboardComponent implements OnInit {
     this.usuario$ = this.store.pipe(select(fromUsuario.getUsuario)) as Observable<fromUsuario.UsuarioResponse>
     this.isAuthorized$ = this.store.pipe(select(fromUsuario.getIsAuthorized)) as Observable<boolean>
     this.store.dispatch(new fromUsuario.Init());
+    this.store.dispatch(ActiveActions.readActiveStart())
   }
 
   onSignOut(): void {

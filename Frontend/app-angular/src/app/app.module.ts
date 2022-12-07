@@ -9,13 +9,14 @@ import { AppComponent } from './app.component';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { reducers, effects} from './store';
+import { ROOT_EFFECTS, ROOT_REDUCERS } from './store';
 
 import { MatDateFormats, MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
 import { environment } from 'environments/environment';
 import { NotificationModule } from './services';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './auth-interceptor';
+
 
 
 
@@ -48,13 +49,13 @@ const APP_DATE_FORMATS: MatDateFormats = {
 
     NotificationModule.forRoot(),
 
-    StoreModule.forRoot(reducers,{
+    StoreModule.forRoot(ROOT_REDUCERS,{
       runtimeChecks: {
         strictActionImmutability: true,
         strictStateImmutability: true
       }
     }),
-    EffectsModule.forRoot(effects),
+    EffectsModule.forRoot(ROOT_EFFECTS),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production })
   ],
   providers: [

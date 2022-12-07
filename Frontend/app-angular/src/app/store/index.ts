@@ -6,10 +6,10 @@ export interface State {
   usuario: fromUsuario.UsuarioState;
 }
 
-export const reducers: ActionReducerMap<State> = {
+export const ROOT_REDUCERS: ActionReducerMap<State> = {
   usuario: fromUsuario.reducer,
 }
 
-export const effects = [
+export const ROOT_EFFECTS = [
   fromUsuario.UsuarioEffects,
 ];
