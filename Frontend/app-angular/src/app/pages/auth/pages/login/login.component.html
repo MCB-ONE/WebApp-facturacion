@@ -1,0 +1,19 @@
+<div class="app-page">
+  <div class="app-page__header">
+    <h1>Iniciar sesión en FacturApp</h1>
+  </div>
+  <form [formGroup]="form" (submit)="onSubmit()" (keyup.enter)="onSubmit()" novalidate autocomplete="off">
+    <app-form-field label="Email" [required]="true" [control]="form.controls['email']"
+      [patternError]="regexError.email">
+      <app-input placeholder="Introduce tu dirección de email" formControlName="email"></app-input>
+    </app-form-field>
+    <app-form-field label="Contraseña" [required]="true" [control]="form.controls['password']"
+      [patternError]="regexError.password">
+      <app-password placeholder="Introduce tu contraseña" formControlName="password"></app-password>
+    </app-form-field>
+    <div class="app-page__footer">
+      <button mat-flat-button color="primary">Iniciar sesión</button>
+    </div>
+  </form>
+  <app-spinner *ngIf="loading$ | async"></app-spinner>
+</div>

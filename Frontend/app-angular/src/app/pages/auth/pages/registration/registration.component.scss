@@ -1,0 +1,26 @@
+@import 'styles/colors.scss';
+
+.app-page{
+  max-width: 500px;
+}
+
+.app-page__footer{
+  max-width: 500px;
+}
+
+form{
+  .mat-flat-button{
+    width: 100%;
+  }
+}
+
+.error{
+  font-size: 14px;
+  opacity: 0;
+  margin-left: 6px;
+  margin-top: -10px;
+  color: $error;
+  &_active{
+    opacity: 1;
+  }
+}

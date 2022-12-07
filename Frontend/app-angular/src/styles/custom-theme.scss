@@ -1,0 +1,98 @@
+@use '@angular/material' as mat;
+@import './base/typography.scss';
+// Custom material theming
+$heading-font-family: "'Roboto', sans-serif";
+$custom-typography: mat.define-typography-config(
+  $display-4: mat.define-typography-level(112px, $font-family: $base-font-family),
+  $display-3: mat.define-typography-level(56px, $font-family: $base-font-family),
+  $display-2: mat.define-typography-level(45px, $font-family: $base-font-family),
+  $display-1: mat.define-typography-level(34px, $font-family: $base-font-family),
+  $headline: mat.define-typography-level(24px, $font-family: $base-font-family),
+  $title: mat.define-typography-level(20px, $font-family: $base-font-family),
+);
+@include mat.core($custom-typography);
+
+// Incluimos los estilos comunes de Angular Material
+/* @include mat.core(); */
+
+
+$custom-accent-map: (
+  50 : #fdfdfd,
+  100 : #f9fafa,
+  200 : #f5f6f7,
+  300 : #f1f2f4,
+  400 : #eef0f1,
+  500 : #ebedef,
+  600 : #e9ebed,
+  700 : #e5e8eb,
+  800 : #e2e5e8,
+  900 : #dde0e4,
+  A100 : #ffffff,
+  A200 : #ffffff,
+  A400 : #ffffff,
+  A700 : #ffffff,
+  contrast: (
+    50 : #000000,
+    100 : #000000,
+    200 : #000000,
+    300 : #000000,
+    400 : #000000,
+    500 : #000000,
+    600 : #000000,
+    700 : #000000,
+    800 : #000000,
+    900 : #000000,
+    A100 : #000000,
+    A200 : #000000,
+    A400 : #000000,
+    A700 : #000000,
+    )
+);
+
+$custom-primary-map: (
+  50: #eaedfb,
+  100: #cbd1f5,
+  200: #a9b3ef,
+  300: #8794e8,
+  400: #6d7de3,
+  500: #5366de,
+  600: #4c5eda,
+  700: #4253d5,
+  800: #3949d1,
+  900: #2938c8,
+  A100: #ffffff,
+  A200: #d4d8ff,
+  A400: #a1a9ff,
+  A700: #8891ff,
+    contrast: (
+      50: #fcfdfd,
+      100: #f8fafb,
+      200: #f4f7f9,
+      300: #f0f3f6,
+      400: #ecf1f4,
+      500: #e9eef2,
+      600: #e6ecf0,
+      700: #e3e9ee,
+      800: #dfe7ec,
+      900: #d9e2e8,
+      A100: #ffffff,
+      A200: #ffffff,
+      A400: #ffffff,
+      A700: #ffffff
+    )
+);
+
+
+
+$primary-palette: mat.define-palette($custom-primary-map);
+$accent-palette: mat.define-palette($custom-accent-map);
+
+
+$custom-theme: mat.define-light-theme((
+  color: (
+    primary: $primary-palette,
+    accent: $accent-palette,
+  )
+));
+
+@include mat.all-component-themes($custom-theme);

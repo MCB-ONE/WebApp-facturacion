@@ -1,0 +1,35 @@
+<div class="app-page">
+  <div class="app-page__header">
+    <h1>Registrar usuario</h1>
+  </div>
+  <form [formGroup]="form" (submit)="onSubmit()" (keyup.enter)="onSubmit()" novalidate autocomplete="off">
+    <app-form-field label="Email" [required]="true" [control]="form.controls['email']"
+      [patternError]="regexError.email">
+      <app-input placeholder="Introduce tu dirección de email" formControlName="email"></app-input>
+    </app-form-field>
+    <app-form-field label="Nombre de usuario" [required]="true" [control]="form.controls['userName']">
+      <app-input placeholder="Introduce tu nombre de usuario" formControlName="userName"></app-input>
+    </app-form-field>
+    <app-form-field label="Nombre" [required]="true" [control]="form.controls['nombre']">
+      <app-input placeholder="Introduce tu nombre" formControlName="nombre"></app-input>
+    </app-form-field>
+    <app-form-field label="Apellido" [required]="true" [control]="form.controls['apellido']">
+      <app-input placeholder="Introduce tu apellido" formControlName="apellido"></app-input>
+    </app-form-field>
+    <app-form-field label="Contraseña" [required]="true" [control]="form.controls['password']"
+      [patternError]="regexError.password">
+      <app-password placeholder="Introduce tu contraseña" formControlName="password"></app-password>
+    </app-form-field>
+    <app-form-field label="Repetir contraseña" [required]="true" [control]="form.controls['passwordRepeat']"
+      [patternError]="regexError.password">
+      <app-password placeholder="Repite de nuevo tu contraseña" formControlName="passwordRepeat"></app-password>
+    </app-form-field>
+    <div class="error" [class.error_active]="form.hasError('repeat')">
+      Las contraseñas no coinciden
+    </div>
+    <div class="app-page__footer">
+      <button mat-flat-button color="primary">Registrarse</button>
+    </div>
+  </form>
+  <app-spinner *ngIf="loading$ | async"></app-spinner>
+</div>

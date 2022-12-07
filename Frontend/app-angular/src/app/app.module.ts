@@ -13,6 +13,8 @@ import { reducers, effects} from './store';
 import { MatDateFormats, MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
 import { environment } from 'environments/environment';
 import { NotificationModule } from './services';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthInterceptor } from './auth-interceptor';
 
 
 
@@ -37,6 +39,7 @@ const APP_DATE_FORMATS: MatDateFormats = {
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    HttpClientModule,
 
     MatNativeDateModule,
 
@@ -52,7 +55,7 @@ const APP_DATE_FORMATS: MatDateFormats = {
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production })
   ],
   providers: [
-
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
     { provide: MAT_DATE_LOCALE, useValue: 'en-GB' },
     { provide: MAT_DATE_LOCALE, useValue: APP_DATE_FORMATS }
   ],
