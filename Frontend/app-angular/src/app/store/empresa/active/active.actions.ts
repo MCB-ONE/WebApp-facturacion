@@ -10,7 +10,7 @@ export const ActiveActions = createActionGroup({
     'Read active success': props<{ empresa: Empresa }>(),
     'Read active error': props<{ error: string }>(),
     // Seleccion empresa activa
-    'Change active empresa start': props<{ empresaId: string }>(),
+    'Change active empresa start': props<{ empresaId: number }>(),
     'Change active empresa success': props<{ empresa: Empresa }>(),
     'Change active empresa error':  props<{ error: string }>(),
   },

@@ -30,3 +30,16 @@
     display: flex;
   }
 }
+
+.app-dashboard{
+  display: flex;
+  padding: 1rem;
+  &-main {
+    width: 75%;
+  }
+
+  &__sidebar{
+    width: 25%;
+    padding: 16px;
+  }
+}

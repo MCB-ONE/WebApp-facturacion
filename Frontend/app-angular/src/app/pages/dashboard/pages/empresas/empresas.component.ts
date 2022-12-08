@@ -14,15 +14,6 @@ export class EmpresasComponent implements OnInit {
   constructor(private store: Store<ListState>,) { }
 
   ngOnInit(): void {
-    //Seleccionar empresas y seleccionar empresa activa incial
-    this.params = this.params.set('pageIndex', 1);
-    this.params = this.params.set('pageSize', 3);
-    this.params = this.params.set('sort', 'idDesc');
-
-    this.store.dispatch(ListActions.readAllStart({
-      requestPagination: this.params,
-      paramsUrl: this.params.toString()
-    }))
   }
 
 }

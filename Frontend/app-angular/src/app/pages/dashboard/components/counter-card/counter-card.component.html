@@ -1,0 +1,14 @@
+<mat-card class="counter-card">
+  <mat-card-header class="counter-card-header">
+    <mat-card-subtitle class="counter-card-subtitle"><mat-icon *ngIf="icon">{{icon}}</mat-icon>{{title}}</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content class="counter-card-content">
+    <span>{{count}}</span>
+    <h3>{{countSubtitle}}</h3>
+  </mat-card-content>
+  <mat-card-actions class="counter-card-actions">
+    <a class="app-a" routerLink="{{link}}">{{linkText}}</a>
+    <button *ngIf="buttonLink" mat-button mat-button mat-flat-button color="primary" routerLink="{{buttonLink}}">{{buttonText}}</button>
+    <button *ngIf="haveButtonAction" mat-button mat-button mat-flat-button color="primary" (click)="onButtonAction()">{{buttonText}}</button>
+  </mat-card-actions>
+</mat-card>

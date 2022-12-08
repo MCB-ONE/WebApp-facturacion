@@ -29,7 +29,7 @@ export class ActiveEffects {
     this.actions$.pipe(
       ofType(ActiveActions.changeActiveEmpresaStart),
       map((action) => action.empresaId),
-      switchMap((id: string) =>
+      switchMap((id: number) =>
         this.httpClient.put<Empresa>(`${environment.url}/api/Empresa/activate/${id}`, null)
           .pipe(
             tap(() => {

@@ -1,0 +1,38 @@
+<mat-card class="sidebar-section">
+  <mat-card-header class="sidebar-section-header">
+    <mat-card-title>Mis empresas</mat-card-title>
+    <mat-card-subtitle>Últimas empresas gestionadas</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content class="clientes" *ngFor="let empresa of empresas">
+    <div class="clientes-item">
+      <div class="clientes-item-header">
+        <h4 class="clientes-item-header-title">{{empresa.nombre}}</h4>
+        <span class="clientes-item-header-subtitle">{{empresa.nif}}</span>
+      </div>
+      <div class="clientes-item-action">
+        <button mat-icon-button aria-label="Example icon button with a vertical three dot icon"
+          [matMenuTriggerFor]="clienteMenu">
+          <mat-icon>more_vert</mat-icon>
+        </button>
+        <mat-menu #clienteMenu="matMenu">
+          <button mat-menu-item (click)="onSelected(empresa.id)">
+            <mat-icon>cached</mat-icon>
+            <span>Seleccionar</span>
+          </button>
+          <button mat-menu-item routerLink="actualizar/{{empresa.id}}">
+            <mat-icon>edit</mat-icon>
+            <span>Editar</span>
+          </button>
+          <button mat-menu-item (click)="onSelected(empresa.id)">
+            <mat-icon>delete</mat-icon>
+            <span>Eliminar</span>
+          </button>
+        </mat-menu>
+      </div>
+    </div>
+  </mat-card-content>
+  <mat-card-actions class="sidebar-section-actions">
+    <button mat-flat-button color="primary" routerLink="nueva" routerLinkActive="app-a_active">Crear nueva</button>
+    <a class="app-a" href="">Ver todas</a>
+  </mat-card-actions>
+</mat-card>

@@ -1,0 +1,29 @@
+<mat-card class="active-empresa" *ngIf="empresa">
+  <div class="active-empresa-logo">
+    <ng-template *ngIf="empresa.logo; else elseBlock">
+      <!-- TODO
+      <img src="" alt="">  -->
+    </ng-template>
+    <ng-template #elseBlock>
+      <span>{{empresa.nombre.charAt(0)}}</span>
+    </ng-template>
+  </div>
+  <mat-card-header class="active-empresa-header">
+    <mat-card-subtitle>{{title}}</mat-card-subtitle>
+    <mat-card-title>{{empresa.nombre}}</mat-card-title>
+    <h4>{{empresa.nif}}</h4>
+  </mat-card-header>
+</mat-card>
+
+<mat-card class="active-empresa__new" *ngIf="!empresa">
+  <div class="active-empresa-logo">
+      <a class="app-a create-action" routerLink="/facturacion/empresas/nueva">
+        <mat-icon>add-company</mat-icon>
+      </a>
+  </div>
+    <mat-card-header class="active-empresa__new-header">
+      <mat-card-title>Crea tu primera empresa</mat-card-title>
+      <mat-card-subtitle>Para poder generar facturas ha de crear una empresa. Para comenzar pulse en este <a class="app-a" routerLink="/facturacion/empresas/nueva">enlace</a> o en el icono grande de la izquierda.</mat-card-subtitle>
+    </mat-card-header>
+    <span class="info">!</span>
+</mat-card>

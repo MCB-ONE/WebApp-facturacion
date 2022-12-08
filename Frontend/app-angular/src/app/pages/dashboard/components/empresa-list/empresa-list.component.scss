@@ -1,0 +1,57 @@
+@import 'styles/colors.scss';
+
+.sidebar-section {
+  padding: 2rem 1rem !important;
+  &-header {
+    margin-bottom: 1rem;
+    .mat-card-header-text{
+      margin-left: 0;
+    }
+  }
+
+  &-actions {
+    margin: 0;
+    padding: 0px 16px;
+    display: flex;
+    justify-content: space-between;
+
+    .app-a {
+      display: flex;
+      align-items: center;
+    }
+  }
+}
+
+.clientes {
+  &-item {
+    display: flex;
+    margin-bottom: 1px;
+    padding: 0 1rem 1rem 1rem;
+    border-bottom: 1px solid lightgrey;
+    justify-content: space-between;
+
+    &-header {
+      &-title {
+        font-size: 18px;
+        font-weight: 500;
+        margin: 0 0 8px 0;
+      }
+
+      &-subtitle {
+        color: rgba(0, 0, 0, 0.54);
+      }
+
+      .app-a {
+        gap: 0.3rem;
+        display: flex;
+        align-items: center;
+      }
+    }
+
+    &-action {
+      button {
+        margin-top: -10px;
+      }
+    }
+  }
+}

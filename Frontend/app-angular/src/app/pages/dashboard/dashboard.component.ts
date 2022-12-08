@@ -1,10 +1,9 @@
-import { ActiveActions } from './../../store/empresa/active/active.actions';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import * as fromRoot from '../../store';
-import * as fromUsuario from '../../store/usuario';
+import * as fromRoot from '@app/store';
+import * as fromUsuario from '@app/store/usuario';
 import { HttpParams } from '@angular/common/http';
 import { menuItem } from './components/menu-list/menu-list.component';
 
@@ -39,7 +38,6 @@ export class DashboardComponent implements OnInit {
     this.usuario$ = this.store.pipe(select(fromUsuario.getUsuario)) as Observable<fromUsuario.UsuarioResponse>
     this.isAuthorized$ = this.store.pipe(select(fromUsuario.getIsAuthorized)) as Observable<boolean>
     this.store.dispatch(new fromUsuario.Init());
-    this.store.dispatch(ActiveActions.readActiveStart())
   }
 
   onSignOut(): void {

@@ -1,0 +1,81 @@
+@import 'styles/colors.scss';
+
+.active-empresa,
+.active-empresa__new {
+  width: fit-content;
+  max-width: 480px;
+  padding-right: 2rem;
+  margin-bottom: 2rem;
+  border-left: 1rem $primary solid;
+  display: flex;
+  align-items: flex-start;
+
+  &-logo {
+    &-title {
+      color: #ececec;
+      margin-bottom: 0;
+    }
+
+    span,
+    .create-action {
+      border-radius: 8px;
+      background-color: $primary;
+      color: $base;
+      width: 76px;
+      height: 76px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 2.5rem;
+      font-weight: 500;
+    }
+
+    .create-action {
+      background-color: $primary-light;
+
+      &:hover {
+        background-color: $primary;
+      }
+    }
+
+  }
+
+  &-header {
+    display: flex;
+    flex-direction: column;
+    align-items: baseline;
+
+    .mat-card-title {
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    h4 {
+      margin-bottom: 0;
+    }
+  }
+}
+
+.active-empresa__new {
+  .info{
+    color: black;
+    font-size: 2rem;
+    font-weight: 600;
+    background: rgb(255 228 0);
+    width: 30px;
+    border-radius: 50%;
+    height: 30px;
+    padding: 1.5rem;
+    display: flex;
+    position: absolute;
+    top: -15px;
+    right: -15px;
+    align-items: center;
+    justify-content: center;
+  }
+  &-header {
+    .mat-card-title {
+      margin-bottom: 1rem;
+    }
+  }
+}

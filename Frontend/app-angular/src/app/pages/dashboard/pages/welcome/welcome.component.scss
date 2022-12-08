@@ -1,0 +1,8 @@
+.counter-cards{
+  display: flex;
+  margin-top: 4rem;
+  gap: 2rem;
+  app-counter-card{
+    width: 33%;
+  }
+}
