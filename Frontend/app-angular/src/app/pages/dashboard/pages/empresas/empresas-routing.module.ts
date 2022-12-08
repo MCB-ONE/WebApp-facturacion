@@ -7,6 +7,14 @@ const routes: Routes = [
     path: '',
     component: EmpresasComponent
   },
+  {
+    path: 'nueva',
+    loadChildren: () => import('./new-empresa/new-empresa.module').then(m=> m.NewEmpresaModule)
+  },
+  {
+    path: ':id',
+    loadChildren: () => import('./update-empresa/update-empresa.module').then(m=> m.UpdateEmpresaModule)
+  }
 ];
 
 @NgModule({

@@ -1,0 +1,27 @@
+@import 'styles/colors.scss';
+
+.app-dashboard__main {
+  width: 50%;
+  height: fit-content;
+  padding: 2rem;
+  margin: 0 auto;
+  border-radius: 26px;
+  box-shadow: 0px 2px 1px -1px rgb(0 0 0 / 5%), 0px 1px 1px 0px rgb(0 0 0 / 4%), 0px 1px 3px 0px rgb(0 0 0 / 8%);
+  h1{
+    margin-top: 0;
+  }
+  .photo {
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    margin: 2rem 0;
+    .app-a{
+      margin-top: 1rem;
+      margin-right: 0;
+    }
+  }
+  button{
+    display: block;
+    margin-left: auto;
+  }
+}
