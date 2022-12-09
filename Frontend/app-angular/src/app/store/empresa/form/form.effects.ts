@@ -9,7 +9,7 @@ import { FormActions } from './form.actions';
 import { Router } from '@angular/router';
 
 @Injectable()
-export class ListEffects {
+export class FormEffects {
   create$ = createEffect(() =>
     this.actions$.pipe(
       ofType(FormActions.createStart),
@@ -17,7 +17,7 @@ export class ListEffects {
         this.httpClient.post<Empresa>(`${environment.url}/api/Empresa`, action.empresa)
           .pipe(
             tap((empresa: Empresa) => {
-              this.router.navigate(['/facturacion/empresa'])
+              this.router.navigate(['/facturacion/inicio'])
             }),
             map((empresa: Empresa) => FormActions.createSuccess({ empresa }),
             ),
@@ -35,7 +35,7 @@ export class ListEffects {
         this.httpClient.put<Empresa>(`${environment.url}/api/Empresa/actualizar/${action.empresaId}`, action.empresa)
           .pipe(
             tap((empresa: Empresa) => {
-              this.router.navigate(['/facturacion/welcome'])
+              this.router.navigate(['/facturacion/inicio'])
             }),
             map((empresa: Empresa) => FormActions.updateSuccess({ empresa }),
             ),
@@ -44,6 +44,21 @@ export class ListEffects {
       )
     )
   );
+
+  read$ = createEffect(() =>
+  this.actions$.pipe(
+    ofType(FormActions.readStart),
+    map((action) => action.empresaId),
+    switchMap((id: string) =>
+      this.httpClient.get<Empresa>(`${environment.url}/api/Empresa/${id}`)
+        .pipe(
+          map((empresa: Empresa) => FormActions.readSuccess({ empresa })
+          ),
+          catchError(error => of(FormActions.readError({ error })))
+        )
+    )
+  )
+);
 
   constructor(
     private actions$: Actions,

@@ -19,7 +19,7 @@
             <mat-icon>cached</mat-icon>
             <span>Seleccionar</span>
           </button>
-          <button mat-menu-item routerLink="actualizar/{{empresa.id}}">
+          <button mat-menu-item routerLink="/facturacion/empresas/actualizar/{{empresa.id}}">
             <mat-icon>edit</mat-icon>
             <span>Editar</span>
           </button>
@@ -32,7 +32,7 @@
     </div>
   </mat-card-content>
   <mat-card-actions class="sidebar-section-actions">
-    <button mat-flat-button color="primary" routerLink="nueva" routerLinkActive="app-a_active">Crear nueva</button>
+    <button mat-flat-button color="primary" routerLink="/facturacion/empresas/nueva" routerLinkActive="app-a_active">Crear nueva</button>
     <a class="app-a" href="">Ver todas</a>
   </mat-card-actions>
 </mat-card>

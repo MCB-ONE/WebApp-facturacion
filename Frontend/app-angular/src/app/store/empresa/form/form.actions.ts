@@ -20,5 +20,10 @@ export const FormActions = createActionGroup({
     'Form set': props<{ form: EmpresaForm }>(),
     'Form update': props<{ changes: Partial<EmpresaForm> }>(),
     'Form clear': emptyProps(),
+
+    // Obtener por id
+    'Read start': props<{ empresaId: string }>(),
+    'Read success': props<{ empresa: Empresa }>(),
+    'Read error': props<{ error: string }>(),
   },
 });

@@ -33,10 +33,20 @@
 
 .app-dashboard{
   display: flex;
+  justify-content: space-between;
   padding: 1rem;
-  &-main {
+  &__main {
     width: 75%;
   }
+
+  &__title{
+    font-weight: 700 !important;
+    margin-bottom: 0.5rem !important;
+  }
+
+  // &__subtitle{
+  //   font-weight: 500;
+  // }
 
   &__sidebar{
     width: 25%;

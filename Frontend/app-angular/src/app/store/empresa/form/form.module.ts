@@ -1,17 +1,17 @@
-import { ListEffects } from './form.effects';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
-import { listReducer } from './list.reducer';
-import { empresaListFeatureKey } from './from.selectors';
+import { empresaFormFeatureKey } from './from.selectors';
+import { formReducer } from './form.reducer';
+import { FormEffects } from './form.effects';
 
 @NgModule({
     imports: [
         CommonModule,
-        StoreModule.forFeature(empresaListFeatureKey, listReducer),
-        EffectsModule.forFeature([ListEffects])
+        StoreModule.forFeature(empresaFormFeatureKey, formReducer),
+        EffectsModule.forFeature([FormEffects])
     ],
-    providers: [ListEffects]
+    providers: [FormEffects]
 })
-export class ListModule { }
+export class FormModule { }

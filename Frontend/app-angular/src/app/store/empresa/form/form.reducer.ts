@@ -8,11 +8,17 @@ export type EmpresaFormState = EmpresaForm;
 
 
 const initialFormSatate: EmpresaFormState = {
-  id: null,
-  emailUsuario: null,
   nombre: null,
   nif: null,
-  logo: null
+  logo: null,
+  calle: null,
+  numero: null,
+  codigoPostal: null,
+  ciudad: null,
+  provincia: null,
+  pais: null,
+  telefono: null,
+  email: null
 };
 
 export interface FormState {
@@ -29,7 +35,7 @@ const initialState: FormState = {
   error: null
 }
 
-export const listReducer = createReducer(
+export const formReducer = createReducer(
   initialState,
 
   // Creacion
@@ -56,6 +62,24 @@ export const listReducer = createReducer(
       empresa: null
     }
   }),
+    // Formulario
+    on(FormActions.formSet, (state,  { form }) => {
+      return {
+        ...state,
+        form: form
+      }
+    }),
+    on(FormActions.formUpdate, (state, { changes }) => {
+      return {
+        ...state,
+        ...changes
+      }
+    }),
+    on(FormActions.formClear, (state) => {
+      return {
+        ...state
+      }
+    }),
   // Actualización
   on(FormActions.updateStart, (state) => {
     return {
@@ -73,6 +97,30 @@ export const listReducer = createReducer(
     }
   }),
   on(FormActions.updateError, (state, { error }) => {
+    return {
+      ...state,
+      loading: false,
+      error: error,
+      empresa: null
+    }
+  }),
+  // Obtener empresa por id
+  on(FormActions.readStart, (state) => {
+    return {
+      ...state,
+      loading: true,
+      error: null,
+    }
+  }),
+  on(FormActions.readSuccess, (state, { empresa }) => {
+    return {
+      ...state,
+      loading: false,
+      error: null,
+      empresa: empresa
+    }
+  }),
+  on(FormActions.readError, (state, { error }) => {
     return {
       ...state,
       loading: false,

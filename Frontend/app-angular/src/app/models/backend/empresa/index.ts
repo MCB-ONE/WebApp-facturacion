@@ -2,9 +2,15 @@ import { BaseEntity } from "../baseEntity";
 import { Direccion } from "../direccion";
 
 export interface Empresa extends BaseEntity{
-  emailUsuario: string;
   nombre: string;
   nif: string;
   logo: string;
-  direcciones: Direccion;
+  calle: string;
+  numero: number;
+  codigoPostal: string;
+  ciudad: string;
+  provincia: string;
+  pais: string;
+  telefono: string;
+  email: string;
 }

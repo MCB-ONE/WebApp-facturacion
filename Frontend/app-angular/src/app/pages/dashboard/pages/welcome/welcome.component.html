@@ -4,7 +4,7 @@
   </div>
   <!-- Cliente con empresas y empresas activas -->
   <ng-container *ngIf="activeEmpresa$ | async as empresa">
-    <div class="app-dashboard-main">
+    <div class="app-dashboard__main">
       <app-active-empresa-header [empresa]="empresa" title="Administrando"></app-active-empresa-header>
       <div class="counter-cards">
         <app-counter-card title="Facturas de {{empresa.nombre}}" icon="list_alt" count="0"
@@ -15,8 +15,8 @@
       </app-counter-card>
       <app-counter-card title="Empresas gestionadas" icon="business" count="0"
       countSubtitle="Empresas totales" link="/facturacion/empresas" linkText="Ver todas"
-      buttonText="Crear nueva"
-      [haveButtonAction]="true"
+      buttonText="Crear nueva" buttonLink="/facturacion/empresas/nueva"
+      [haveButtonAction]="false"
       >
       </app-counter-card>
       </div>

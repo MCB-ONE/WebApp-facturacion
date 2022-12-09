@@ -9,11 +9,11 @@ const routes: Routes = [
   },
   {
     path: 'nueva',
-    loadChildren: () => import('./new-empresa/new-empresa.module').then(m=> m.NewEmpresaModule)
+    loadChildren: () => import('./pages/new-empresa/new-empresa.module').then(m=> m.NewEmpresaModule)
   },
   {
-    path: ':id',
-    loadChildren: () => import('./update-empresa/update-empresa.module').then(m=> m.UpdateEmpresaModule)
+    path: 'actualizar/:id',
+    loadChildren: () => import('./pages/update-empresa/update-empresa.module').then(m=> m.UpdateEmpresaModule)
   }
 ];
 

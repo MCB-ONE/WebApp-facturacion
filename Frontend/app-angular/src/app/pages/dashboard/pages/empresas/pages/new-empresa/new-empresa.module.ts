@@ -3,9 +3,10 @@ import { CommonModule } from '@angular/common';
 
 import { NewEmpresaRoutingModule } from './new-empresa-routing.module';
 import { NewEmpresaComponent } from './new-empresa.component';
-import { ControlsModule, FormFieldModule, IndicatorsModule, InputModule, PopupsModule, SpinnerModule, UserPhotoModule } from '@app/shared';
+import { ControlsModule, FormFieldModule, IndicatorsModule, InputModule, SpinnerModule, UserPhotoModule } from '@app/shared';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
+import { FormModule } from '@app/store/empresa/form/form.module';
 
 
 @NgModule({
@@ -16,10 +17,10 @@ import { MatButtonModule } from '@angular/material/button';
     CommonModule,
     NewEmpresaRoutingModule,
     ReactiveFormsModule,
+    FormModule,
     MatButtonModule,
     ControlsModule,
     IndicatorsModule,
-    PopupsModule,
     FormFieldModule,
     InputModule,
     UserPhotoModule,
