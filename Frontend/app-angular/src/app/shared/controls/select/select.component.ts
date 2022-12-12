@@ -60,17 +60,6 @@ export class SelectComponent implements OnInit, ControlValueAccessor {
     this.propagateTouched();
   }
 
-/*   onKeyUp(event: Event): void{
-    const { target } = event;
-    this.value = (target as HTMLInputElement).value;
-    this.propagateChange(this.value);
-    this.changed.emit(this.value);
-  }
-
-/*   togglePassword():void{
-    this.passwordType = this.passwordType == 'password'? 'text' : 'password';
-  }
- */
 
 
 }

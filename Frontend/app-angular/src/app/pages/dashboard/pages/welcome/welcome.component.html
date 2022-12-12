@@ -9,8 +9,8 @@
       <div class="counter-cards">
         <app-counter-card title="Facturas de {{empresa.nombre}}" icon="list_alt" count="0"
         countSubtitle="Facturas totales" link="/facturacion/facturas" linkText="Ver todas"
-        buttonText="Generar factura"
-        [haveButtonAction]="true"
+        buttonText="Generar factura" buttonLink="/facturacion/facturas/nueva"
+        [haveButtonAction]="false"
         >
       </app-counter-card>
       <app-counter-card title="Empresas gestionadas" icon="business" count="0"

@@ -60,7 +60,7 @@ const APP_DATE_FORMATS: MatDateFormats = {
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
-    { provide: MAT_DATE_LOCALE, useValue: 'en-GB' },
+    { provide: MAT_DATE_LOCALE, useValue: 'es-ES' },
     { provide: MAT_DATE_LOCALE, useValue: APP_DATE_FORMATS }
   ],
   bootstrap: [AppComponent]

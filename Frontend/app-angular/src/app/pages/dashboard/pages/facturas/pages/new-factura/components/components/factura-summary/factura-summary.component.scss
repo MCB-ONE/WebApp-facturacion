@@ -1,0 +1,26 @@
+@import "styles/mixins";
+
+.summary {
+
+    @include card;
+    width: fit-content;
+    padding: 1.5rem;
+
+    h3 {
+        font-size: 18px;
+        font-weight: 700;
+    }
+
+    &__item {
+        display: flex;
+        place-content: space-between;
+        margin-bottom: .5rem;
+        &__title {
+            font-weight: 600;
+        }
+    }
+    &__item:last-child{
+        margin: 1rem 0;
+        font-size: 1.3rem;
+    }
+}

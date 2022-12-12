@@ -1,0 +1,20 @@
+<div class="form">
+    <form [formGroup]="form" novalidate autocomplete="off" (ngSubmit)="onSubmit()">
+        <app-form-field label="Concepto" [required]="true" [control]="form.controls['concepto']">
+            <app-input formControlName="concepto"></app-input>
+        </app-form-field>
+
+        <app-form-field label="Precio unitario" [required]="true" [control]="form.controls['precioUnitario']">
+            <app-input formControlName="precioUnitario"></app-input>
+        </app-form-field>
+
+        <app-form-field label="Cantidad" [required]="true" [control]="form.controls['cantidad']">
+            <app-input formControlName="cantidad"></app-input>
+        </app-form-field>
+
+        <div class="form__actions">
+                <button mat-flat-button color="primary" type="submit">Agregar</button>
+        </div>
+
+    </form>
+</div>

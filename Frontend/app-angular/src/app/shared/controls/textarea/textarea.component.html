@@ -1,10 +1,8 @@
-<input type="text"
-  class="app-input"
-  [ngClass]="{'app-input-disabled' : isDisabled}"
+<textarea type="text"
+  class="app-textarea"
   [value]="value"
   [placeholder]="placeholder || ''"
   [attr.disabled]="isDisabled ? true : null"
   (keyup)="onKeyUp($event)"
   (blur)="onBlur()"
->
-
+></textarea>

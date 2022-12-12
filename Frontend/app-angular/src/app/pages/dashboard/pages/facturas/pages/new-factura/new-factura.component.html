@@ -1,0 +1,108 @@
+<div class="app-dashboard">
+  <div class="spinner" *ngIf="!isLoaded">
+    <app-spinner></app-spinner>
+  </div>
+  <ng-container *ngIf="isLoaded">
+    <div class="app-dashboard__main" *ngIf=" activeEmpresa$ | async as empresa">
+      <div class="app-dashboard__header">
+        <h2 class="app-dashboard__title">Crear nueva factura</h2>
+        <p class="app-dashboard__subtitle">Genera una nueva factura para {{empresa.nombre}} a partir de este formulario.
+        </p>
+      </div>
+      <form class="app-form" [formGroup]="form" autocomplete="off" (submit)="onPreviw()">
+        <div class="flex-between">
+          <div class="app-form__section">
+            <h3 class="app-form__section__title">Detalles de su empresa</h3>
+            <p><span class="app-form__section__label">Nombre social:</span> {{empresa.nombre}}</p>
+            <p><span class="app-form__section__label">NIF:</span> {{empresa.nif}}</p>
+            <div>
+              <span class="app-form__section__label">Direccion:</span>
+              <ul class="app-form__section__list">
+                <li>{{empresa.calle}}, nº{{empresa.numero}}, {{empresa.ciudad}}({{empresa.codigoPostal}})</li>
+                <li>{{empresa.pais}} - {{empresa.provincia}}</li>
+                <li>{{empresa.email}}</li>
+              </ul>
+            </div>
+          </div>
+          <div class="app-form__section">
+            <h3 class="app-form__section__title">Datos de facturación</h3>
+            <div class="app-form__section__flex-container">
+              <div class="flex-between">
+                <app-form-field label="Fecha de expedición" [control]="form.controls['fechaExpedicion']">
+                  <app-date formControlName="fechaExpedicion" placeholder="Expedición"></app-date>
+                </app-form-field>
+                <app-form-field label="Número de factura" [control]="form.controls['numeroFactura']">
+                  <app-input [isDisabled]=true formControlName="numeroFactura"
+                  ></app-input>
+                </app-form-field>
+              </div>
+              <app-form-field label="Tipo de IVA" [control]="form.controls['iva']">
+                <app-select formControlName="iva"
+                 [items]="ivaOptions"
+                 (ngModelChange)="ivaChanged($event)"
+                ></app-select>
+              </app-form-field>
+            </div>
+          </div>
+        </div>
+        <div class="app-form__section">
+          <h3 class="app-form__section__title">Datos del cliente</h3>
+          <div class="app-form__section__flex-container">
+            <app-form-field label="Nombre social" [required]="true" [control]="form.controls['nombre']">
+              <app-input formControlName="nombre"> </app-input>
+            </app-form-field>
+            <app-form-field label="Nif" [required]="true" [control]="form.controls['nif']"
+              [patternError]="regexErrors.nif">
+              <app-input formControlName="nif"></app-input>
+            </app-form-field>
+            <app-form-field label="Calle" [required]="true" [control]="form.controls['calle']">
+              <app-input formControlName="calle"></app-input>
+            </app-form-field>
+            <app-form-field label="Número" [required]="true" [control]="form.controls['numero']"
+              [patternError]="regexErrors.number">
+              <app-input formControlName="numero"></app-input>
+            </app-form-field>
+            <app-form-field label="Código Postal" [required]="true" [control]="form.controls['codigoPostal']"
+              [patternError]="regexErrors.number">
+              <app-input formControlName="codigoPostal"></app-input>
+            </app-form-field>
+            <app-form-field label="Ciudad" [required]="true" [control]="form.controls['ciudad']">
+              <app-input formControlName="ciudad"></app-input>
+            </app-form-field>
+            <app-form-field label="Provincia" [required]="true" [control]="form.controls['provincia']">
+              <app-input formControlName="provincia"></app-input>
+            </app-form-field>
+            <app-form-field label="País" [required]="true" [control]="form.controls['pais']">
+              <app-input formControlName="pais"></app-input>
+            </app-form-field>
+            <app-form-field label="Telefono" [required]="true" [control]="form.controls['telefono']"
+              [patternError]="regexErrors.phone">
+              <app-input formControlName="telefono"></app-input>
+            </app-form-field>
+            <app-form-field label="Email" [required]="true" [control]="form.controls['email']"
+              [patternError]="regexErrors.email">
+              <app-input formControlName="email"></app-input>
+            </app-form-field>
+          </div>
+        </div>
+        <div class="app-form__section" *ngIf="lineasFactura">
+          <h3 class="app-form__section__title">Líneas de factura</h3>
+          <app-linea-factura *ngFor="let linea of lineasFactura" [item]="linea" (edit)="onEditLineaFactura($event)"
+            (delete)="onDeleteLineaFactura($event)"></app-linea-factura>
+
+          <div class="app-form__actions">
+            <button mat-flat-button color="accent" (click)="onAddLineaFactura()">Agregar línea</button>
+          </div>
+
+        </div>
+        <mat-divider></mat-divider>
+        <div class="app-form__section summary">
+          <app-factura-summary [iva]="iva"></app-factura-summary>
+        </div>
+        <div class="app-form__actions">
+          <button mat-flat-button color="primary">Generar Factura</button>
+        </div>
+      </form>
+    </div>
+  </ng-container>
+</div>

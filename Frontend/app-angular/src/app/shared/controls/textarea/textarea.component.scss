@@ -1,6 +1,6 @@
-@import '../colors.scss';
+@import 'styles/colors.scss';
 
-.app-input{
+.app-textarea{
   width: 100%;
   background-color: transparent;
   border: none;
@@ -13,8 +13,5 @@
   &:focus{
     border: none;
     border-bottom: 1px solid $primary-dark;
-  }
-  &-disabled{
-    background-color: $primary-light;
   }
 }

@@ -1,7 +1,7 @@
-import { Factura } from '@app/models/backend/factura';
 import { BaseEntity } from "../baseEntity";
+import { Direccion } from "../direccion";
 
-export interface Empresa extends BaseEntity{
+export interface Cliente{
   nombre: string;
   nif: string;
   logo: string;
@@ -13,7 +13,4 @@ export interface Empresa extends BaseEntity{
   pais: string;
   telefono: string;
   email: string;
-  facturas: FacturaEmpresa[];
 }
-
-type FacturaEmpresa = Omit<Factura, 'empresaId'>;

@@ -1,33 +1,30 @@
-import { Component, forwardRef, Input, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, EventEmitter, forwardRef, Input, OnInit, Output } from '@angular/core';
 import { AbstractControl, ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import {FormControl, FormGroupDirective, NgForm, Validators} from '@angular/forms';
-import {ErrorStateMatcher} from '@angular/material/core';
 
 @Component({
-  selector: 'app-input',
-  templateUrl: './input.component.html',
-  styleUrls: ['./input.component.scss'],
+  selector: 'app-textarea',
+  templateUrl: './textarea.component.html',
+  styleUrls: ['./textarea.component.scss'],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => InputComponent),
+      useExisting: forwardRef(() => TextareaComponent),
       multi: true
     }
   ]
 })
-export class InputComponent implements OnInit, ControlValueAccessor {
+export class TextareaComponent implements OnInit, ControlValueAccessor {
 
   @Input() placeholder!: string;
   @Input() label!: string;
   @Input() required!: boolean;
   @Output() changed = new EventEmitter<string>();
   @Input() control!: AbstractControl;
-  @Input() isDisabled: boolean = false;
 
   value!: string;
+  isDisabled: boolean = false;
 
   constructor() { }
-
 
   ngOnInit(): void {
   }

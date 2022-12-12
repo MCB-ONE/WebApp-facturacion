@@ -1,6 +1,7 @@
 import { Component, EventEmitter, forwardRef, Input, OnInit, Output } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { MatDatepickerInputEvent } from '@angular/material/datepicker';
+import { DatePipe } from '@angular/common';
 
 type Value = number;
 
@@ -34,7 +35,7 @@ export class DateComponent implements OnInit, ControlValueAccessor {
   value!: Value;
   isDisabled!: boolean;
 
-  constructor() { }
+  constructor(private datepipe: DatePipe) { }
 
   private propagateChange: any = () =>{}
   private propagateTouched: any = () =>{}
@@ -60,11 +61,11 @@ export class DateComponent implements OnInit, ControlValueAccessor {
   }
 
   onChanged(event: MatDatepickerInputEvent<Date>):void{
+    console.log(this.datepipe.transform(event.value, 'dd/MM/YYYY'))
     const value = event.value ? event.value.getTime() : new Date().getTime();
     this.value = value;
     this.propagateChange(value);
     this.changed.emit(value);
-
   }
 
   onClosed(): void{

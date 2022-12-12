@@ -20,7 +20,7 @@
 .mat-list-item{
   transition: background-color .3s;
 
-  &:hover{
+  &:hover, &:active{
     color: $on-base;
     background-color: #cbd1f572;
   }

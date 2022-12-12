@@ -6,6 +6,8 @@ export const regex = {
 
     number: /^\d+$/,
 
+    decimal: /^\d+\.\d{0,2}$/,
+
     nif: /^(\d{8})([A-Z])$/,
 
     phone: /^(?:(?:\+?[0-9]{2,4})?[ ]?[6789][0-9 ]{8,13})$/
@@ -16,6 +18,7 @@ export const regex = {
     email: 'El email es incorrecto.',
     password: 'El password debe contener una letra mayúscula, minúscula, un número y un caracter especial.',
     number: 'Solo puede ingresar números.',
+    decimal: 'Solo se aceptan dos decimales. Ej: 10.50',
     nif: 'El formato ha de ser el siguiente: 98226837E',
     phone: 'Solo se admiten los siguientes formatos: +34666555444, 34666555444, 666555444'
   }

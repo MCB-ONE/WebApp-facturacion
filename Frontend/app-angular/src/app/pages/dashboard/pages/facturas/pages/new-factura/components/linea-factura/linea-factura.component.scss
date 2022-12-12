@@ -1,0 +1,25 @@
+@import "styles/mixins";
+
+.linea-factura {
+    padding: 1rem;
+    margin-bottom: 1rem;
+    @include card;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    &__content{
+        display: flex;
+
+        &__item{
+
+           span{
+            font-weight: 600;
+           }
+        }
+    }
+
+    &__actions{
+        display: flex;
+        gap: 1rem;
+    }
+}

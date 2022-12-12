@@ -1,0 +1,16 @@
+<div class="summary">
+    <h3>Resumen final factura</h3>
+    <div class="summary__item">
+        <div>Subtotal</div>
+        <div>{{subTotal|currency:'EUR':true}}</div>
+    </div>
+    <div class="summary__item">
+        <div>Iva</div>
+        <div>{{totalIva|currency:'EUR':true}}</div>
+    </div>
+    <mat-divider></mat-divider>
+    <div class="summary__item">
+        <div class="summary__item__title">Total</div>
+        <div>{{total|currency:'EUR':true}}</div>
+    </div>
+</div>

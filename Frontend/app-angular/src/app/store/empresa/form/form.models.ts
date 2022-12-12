@@ -1,10 +1,10 @@
 import { Empresa as DbEmpresa } from '@app/models/backend/empresa';
 
-export type EmpresaCreateRequest = Omit<DbEmpresa, 'id'>;
+export type EmpresaCreateRequest = Omit<DbEmpresa, 'id' | 'facturas'>;
 
-export type EmpresaUpdateRequest = DbEmpresa;
+export type EmpresaUpdateRequest = Omit<DbEmpresa, 'facturas'>;
 
-export interface EmpresaForm {
+export interface EmpresaForm{
   nombre: string | null;
   nif: string | null;
   logo: string | null;

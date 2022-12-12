@@ -7,6 +7,10 @@ const routes: Routes = [
     path: '',
     component: FacturasComponent
   },
+  {
+    path: 'nueva',
+    loadChildren: () => import('./pages/new-factura/new-factura.module').then(m=> m.NewFacturaModule)
+  },
 ];
 
 @NgModule({

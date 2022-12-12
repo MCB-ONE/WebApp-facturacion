@@ -1,0 +1,14 @@
+<div class="linea-factura">
+    <div class="linea-factura__content">
+        <div class="linea-factura__content__item">
+            <span>{{item.concepto}}</span>
+            {{item.precioUnitario}}€ x {{item.cantidad}}uds.</div>
+        <div class="linea-factura__content__item">
+            <span>Total:</span>{{item.totalLinea}}
+        </div>
+    </div>
+    <div class="linea-factura__actions">
+        <button mat-flat-button color="basic" (click)="onEdit(item)">Editar</button>
+        <button mat-flat-button color="warn" (click)="onDelete(item)">Eliminar</button>
+    </div>
+</div>
