@@ -67,34 +67,6 @@ namespace Core.Specifications.Factura
             AddInclude(factura => factura.Cliente);
             AddInclude(factura => factura.LineasFactura);
 
-            ApplyPaging(facturaParams.PageSize * (facturaParams.PageIndex - 1), facturaParams.PageSize);
-
-            if (!string.IsNullOrEmpty(facturaParams.Sort))
-            {
-                switch (facturaParams.Sort)
-                {
-                    case "fechaAsc":
-                        AddOrderBy(empresa => empresa.FechaExpedicion);
-                        break;
-
-                    case "fechaDesc":
-                        AddOrderByDescending(empresa => empresa.FechaExpedicion);
-                        break;
-
-                    case "numAsc":
-                        AddOrderBy(empresa => empresa.FechaExpedicion);
-                        break;
-
-                    case "numDesc":
-                        AddOrderByDescending(empresa => empresa.FechaExpedicion);
-                        break;
-
-                    default:
-                        AddOrderByDescending(empresa => empresa.Id);
-                        break;
-                }
-            }
-
         }
     }
 }

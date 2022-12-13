@@ -25,7 +25,7 @@ namespace WebApi.Controllers
 
         [HttpGet("empresa/{id}")]
         [Authorize]
-        public async Task<ActionResult<Pagination<FacturaDto>>> GetAllFacturasByEmpresaId(int id, [FromQuery] SpecificationParams facturaParams)
+        public async Task<ActionResult<IReadOnlyList<FacturaDto>>> GetAllFacturasByEmpresaId(int id, [FromQuery] SpecificationParams facturaParams)
         {
             var emailUsuario = HttpContext.User?.Claims?.FirstOrDefault(x => x.Type == ClaimTypes.Email)?.Value;
 
@@ -38,23 +38,9 @@ namespace WebApi.Controllers
                 return NotFound();
             }
 
-            var specCount = new FacturaForCountingSpecification(facturaParams, id);
-
-            var totalFacuras = await _repository.CountAsync(specCount);
-
-
-            var rounded = Math.Ceiling(Convert.ToDecimal(totalFacuras / facturaParams.PageSize));
-            var totalPages = Convert.ToInt32(rounded);
             var data = _mapper.Map<IReadOnlyList<Factura>, IReadOnlyList<FacturaDto>>(facturas);
 
-            return Ok(new Pagination<FacturaDto>
-            {
-                Count = totalFacuras,
-                PageCount = totalPages,
-                Data = data,
-                PageIndex = facturaParams.PageIndex,
-                PageSize = facturaParams.PageSize
-            });
+            return Ok(data);
         }
 
 
@@ -80,12 +66,12 @@ namespace WebApi.Controllers
 
             var result = await _repository.AddFacturaAsync(emailUsuario, _mapper.Map<Factura>(facturaCreate), lineasFactura);
 
-            if (result == 0)
+            if (result == null)
             {
                 return BadRequest("No se ha podido crear la factura");
             };
 
-            return Ok(facturaCreate);
+            return Ok(_mapper.Map<FacturaDto>(result));
         }
 
         [HttpPut("actualizar/{id}")]

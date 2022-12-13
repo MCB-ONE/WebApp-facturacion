@@ -9,7 +9,7 @@ namespace Core.Interfaces
 {
     public interface IFacturaRepository : IGenericRepository<Factura>
     {
-        Task<int> AddFacturaAsync(string emailUsuario, Factura factura, HashSet<LineaFactura> lineasFactura);
+        Task<Factura> AddFacturaAsync(string emailUsuario, Factura factura, HashSet<LineaFactura> lineasFactura);
 
         Task<int> UpdateFacturaAsync(int id, Factura factura);
 

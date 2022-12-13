@@ -23,7 +23,7 @@ namespace BussinesLogic.Logic
             _logger = logger;
         }
 
-        public async Task<int> AddFacturaAsync(string emailUsuario, Factura factura, HashSet<LineaFactura> lineasFactura)
+        public async Task<Factura> AddFacturaAsync(string emailUsuario, Factura factura, HashSet<LineaFactura> lineasFactura)
         {
             _logger.LogWarning($"{nameof(EmpresaRepository)} - {nameof(AddFacturaAsync)} - Warning Level Log");
             _logger.LogError($"{nameof(EmpresaRepository)} - {nameof(AddFacturaAsync)} - Error Level Log");
@@ -31,12 +31,12 @@ namespace BussinesLogic.Logic
 
             if (factura is null)
             {
-                throw new ArgumentNullException("Entidad");
+                return null;
             }
 
-            if (lineasFactura is null)
+            if (!lineasFactura.Any())
             {
-                return 0;
+                return null;
             }
 
             // Subtotal factura acumulado
@@ -68,7 +68,10 @@ namespace BussinesLogic.Logic
 
             _context.Set<Factura>().Add(factura);
 
-            return await _context.SaveChangesAsync();
+            await _context.SaveChangesAsync();
+
+
+            return factura;
 
         }
         public async Task<int> UpdateFacturaAsync(int id, Factura facturaUpdated)
