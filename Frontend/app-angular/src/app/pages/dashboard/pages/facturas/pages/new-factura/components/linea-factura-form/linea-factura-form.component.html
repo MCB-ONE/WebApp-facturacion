@@ -4,11 +4,11 @@
             <app-input formControlName="concepto"></app-input>
         </app-form-field>
 
-        <app-form-field label="Precio unitario" [required]="true" [control]="form.controls['precioUnitario']">
+        <app-form-field label="Precio unitario" [required]="true" [control]="form.controls['precioUnitario']" [patternError]="regexErrors.decimal">
             <app-input formControlName="precioUnitario"></app-input>
         </app-form-field>
 
-        <app-form-field label="Cantidad" [required]="true" [control]="form.controls['cantidad']">
+        <app-form-field label="Cantidad" [required]="true" [control]="form.controls['cantidad']" [patternError]="regexErrors.number">
             <app-input formControlName="cantidad"></app-input>
         </app-form-field>
 

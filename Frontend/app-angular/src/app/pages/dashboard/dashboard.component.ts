@@ -25,7 +25,6 @@ export class DashboardComponent implements OnInit {
 
   usuario$ !: Observable<fromUsuario.UsuarioResponse>;
   isAuthorized$ !: Observable<boolean>
-  params = new HttpParams();
 
   constructor(
     private store: Store<fromRoot.State>,

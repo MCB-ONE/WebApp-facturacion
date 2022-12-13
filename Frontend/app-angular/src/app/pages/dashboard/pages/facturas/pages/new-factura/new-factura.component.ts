@@ -8,13 +8,13 @@ import * as fromActiveEmpresa from '@app/store/empresa/active/active.reducer';
 import { getActiveEmpresa } from '@app/store/empresa/active/active.selectors';
 import { IControlItem, ILineaFacturaItem } from '@app/models/frontend';
 import { Empresa } from '@app/models/backend';
-import { getLoading } from '@app/store/factura/form/from.selectors';
 import { LineaFacturaFormComponent } from './components/linea-factura-form/linea-factura-form.component';
 import { MatDialog } from '@angular/material/dialog';
 import { LineafacturaService } from './services/linea-factura/lineafactura.service';
 import { LineaFactura } from '@app/models/backend/lineaFactura';
 import { DatePipe } from '@angular/common';
 import { FormActions } from '@app/store/factura/form/form.actions';
+import {NotificationService} from '@app/services';
 
 @Component({
   selector: 'app-new-factura',
@@ -41,6 +41,7 @@ export class NewFacturaComponent implements OnInit {
     private dialog: MatDialog,
     private datepipe: DatePipe,
     private lineaFacturaService: LineafacturaService,
+    private notification: NotificationService
   ) {
     this.ivaOptions = [
       { label: '4%', value: 4 },
@@ -179,6 +180,10 @@ export class NewFacturaComponent implements OnInit {
     this.iva = parseInt(event);
   }
 
+  lineasError() {
+    this.notification.error("Ha de incluir como mínimo una línea de factura")
+  }
+
   onSubmit(): void {
     if (this.form.valid) {
       const value = this.form.value;
@@ -204,7 +209,10 @@ export class NewFacturaComponent implements OnInit {
         lineasFactura: this.lineasFactura
       }
 
-      console.log(factura);
+      if(this.lineasFactura.length == 0){
+        this.lineasError();
+      }
+
       this.store.dispatch(FormActions.createStart({ factura: factura }))
     } else {
       markFormGroupTouched(this.form);
