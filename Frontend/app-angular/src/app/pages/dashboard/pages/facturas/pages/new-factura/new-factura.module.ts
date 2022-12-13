@@ -12,6 +12,7 @@ import { LineaFacturaFormModule } from './components/linea-factura-form/linea-fa
 import { LineafacturaService } from './services/linea-factura/lineafactura.service';
 import { FacturaSummaryComponent } from './components/components/factura-summary/factura-summary.component';
 import { MatDividerModule } from '@angular/material/divider';
+import { FormModule } from '@app/store/factura/form/form.module';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { MatDividerModule } from '@angular/material/divider';
     UserPhotoModule,
     SpinnerModule,
     MatDialogModule,
-    LineaFacturaFormModule
+    LineaFacturaFormModule,
+    FormModule
   ],
   providers: [LineafacturaService],
 })

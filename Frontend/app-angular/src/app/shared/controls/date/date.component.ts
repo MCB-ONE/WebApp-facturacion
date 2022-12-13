@@ -61,7 +61,6 @@ export class DateComponent implements OnInit, ControlValueAccessor {
   }
 
   onChanged(event: MatDatepickerInputEvent<Date>):void{
-    console.log(this.datepipe.transform(event.value, 'dd/MM/YYYY'))
     const value = event.value ? event.value.getTime() : new Date().getTime();
     this.value = value;
     this.propagateChange(value);

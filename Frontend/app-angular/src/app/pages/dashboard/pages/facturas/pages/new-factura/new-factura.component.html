@@ -9,7 +9,7 @@
         <p class="app-dashboard__subtitle">Genera una nueva factura para {{empresa.nombre}} a partir de este formulario.
         </p>
       </div>
-      <form class="app-form" [formGroup]="form" autocomplete="off" (submit)="onPreviw()">
+      <form class="app-form" [formGroup]="form" autocomplete="off" (submit)="onSubmit()">
         <div class="flex-between">
           <div class="app-form__section">
             <h3 class="app-form__section__title">Detalles de su empresa</h3>
@@ -91,7 +91,7 @@
             (delete)="onDeleteLineaFactura($event)"></app-linea-factura>
 
           <div class="app-form__actions">
-            <button mat-flat-button color="accent" (click)="onAddLineaFactura()">Agregar línea</button>
+            <button mat-flat-button color="accent" type="button" (click)="onAddLineaFactura()">Agregar línea</button>
           </div>
 
         </div>

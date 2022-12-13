@@ -6,29 +6,7 @@ import { ILineaFacturaItem } from '@app/models/frontend';
 })
 export class LineafacturaService {
 
-  lineasFactura: ILineaFacturaItem[] = [
-    {
-      id: 1,
-      concepto: "Coca-cola",
-       precioUnitario: 0.40,
-       cantidad: 20,
-       totalLinea: 80
-    },
-    {
-      id: 2,
-      concepto: "Fanta",
-       precioUnitario: 0.50,
-       cantidad: 20,
-       totalLinea: 80
-    },
-    {
-      id: 3,
-      concepto: "Nestea",
-       precioUnitario: 0.30,
-       cantidad: 2,
-       totalLinea: 80
-    }
-  ];
+  lineasFactura: ILineaFacturaItem[] = [];
 
   lineasFacturaUpdated: EventEmitter<ILineaFacturaItem[]> = new EventEmitter();
 
@@ -76,7 +54,7 @@ export class LineafacturaService {
       cantidad: lineaFactura.cantidad,
       totalLinea: total
     }
-    this.lineasFactura.unshift(newLineaFactura);
+    this.lineasFactura = [...this.lineasFactura, newLineaFactura]
 
     this.lineasFacturaUpdated.emit(this.lineasFactura);
   }

@@ -21,7 +21,6 @@ export class FacturaSummaryComponent implements OnInit {
       this._iva = value;
       this.lineasFactura = this.lineaFacturaService.getLineas();
       this.getSummary();
-      console.log(value);
 
   }
   get minor(): number {
@@ -39,7 +38,6 @@ export class FacturaSummaryComponent implements OnInit {
         console.log(this.lineasFactura)
     });
     this.getSummary();
-    console.log(this.lineasFactura);
   }
 
 

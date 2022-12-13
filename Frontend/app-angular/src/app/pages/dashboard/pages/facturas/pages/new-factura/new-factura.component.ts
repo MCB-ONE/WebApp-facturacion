@@ -14,6 +14,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { LineafacturaService } from './services/linea-factura/lineafactura.service';
 import { LineaFactura } from '@app/models/backend/lineaFactura';
 import { DatePipe } from '@angular/common';
+import { FormActions } from '@app/store/factura/form/form.actions';
 
 @Component({
   selector: 'app-new-factura',
@@ -31,7 +32,6 @@ export class NewFacturaComponent implements OnInit {
   ivaOptions!: IControlItem[];
   empresaDirecciones: IControlItem[] = [];
   lineasFactura!: ILineaFacturaItem[];
-  facturaPreview!: FacturaCreateRequest;
   iva: number = 21;
 
 
@@ -65,7 +65,7 @@ export class NewFacturaComponent implements OnInit {
     });
 
     this.form = this.fb.group({
-      fechaExpedicion: [this.datepipe.transform(Date.now(), 'dd/MM/YYYY'), {
+      fechaExpedicion: [this.datepipe.transform(Date.now(), 'yyyy-MM-dd'), {
         updateOn: 'blur'
       }],
       numeroFactura: [this.facturasCount],
@@ -179,15 +179,15 @@ export class NewFacturaComponent implements OnInit {
     this.iva = parseInt(event);
   }
 
-  onPreviw(): void {
+  onSubmit(): void {
     if (this.form.valid) {
       const value = this.form.value;
+      const fechaFormated = this.datepipe.transform(value.fechaExpedicion, 'yyyy-MM-dd')!;
+
       const factura: FacturaCreateRequest = {
-        fechaExpedicion: value.fechaExpedicion,
+        fechaExpedicion: fechaFormated,
         iva: value.iva,
-        numero: value.numeroFactura,
         empresaId: this.empresaId,
-        subtotal: value.subtotal,
         cliente: {
           nombre: value.nombre,
           nif: value.nif,
@@ -203,9 +203,9 @@ export class NewFacturaComponent implements OnInit {
         },
         lineasFactura: this.lineasFactura
       }
-      this.facturaPreview = factura;
-      // this.store.dispatch(DireccionActions.createStart({ direccion: direccion }))
-      //
+
+      console.log(factura);
+      this.store.dispatch(FormActions.createStart({ factura: factura }))
     } else {
       markFormGroupTouched(this.form);
     }
