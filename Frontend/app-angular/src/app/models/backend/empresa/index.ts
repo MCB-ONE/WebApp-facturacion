@@ -16,4 +16,4 @@ export interface Empresa extends BaseEntity{
   facturas: FacturaEmpresa[];
 }
 
-type FacturaEmpresa = Omit<Factura, 'empresaId'>;
+export type FacturaEmpresa = Omit<Factura, 'empresaId'>;

@@ -1,1 +1,6 @@
-<p>facturas works!</p>
+<ng-container  *ngIf="facturasList">
+    <h3>Facturas</h3>
+    <app-facturas-table
+    [tableData]="facturasList"
+    ></app-facturas-table>
+</ng-container>

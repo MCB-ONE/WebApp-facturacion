@@ -2,7 +2,7 @@ import { Cliente } from "@app/models/backend/cliente";
 import { Factura } from "@app/models/backend/factura";
 import { LineaFactura } from "@app/models/backend/lineaFactura";
 
-export type FacturaCreateRequest = Omit<Factura, 'id'>;
+export type FacturaCreateRequest = Omit<Factura, 'id' | 'numero'>;
 
 export type FacturaUpdateRequest = Factura;
 

@@ -5,6 +5,7 @@ import { Cliente } from "../cliente";
 
 export interface Factura extends BaseEntity{
     empresaId: number;
+    numero: number;
     fechaExpedicion: string;
     iva: number;
     cliente: Cliente;

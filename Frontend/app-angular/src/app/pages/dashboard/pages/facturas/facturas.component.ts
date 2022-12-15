@@ -1,12 +1,11 @@
-import { Factura } from '@app/models/backend/factura/index';
 import { Component, OnInit } from '@angular/core';
-import { Empresa } from '@app/models/backend';
+import { Empresa, FacturaEmpresa } from '@app/models/backend';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import * as fromActiveEmpresa from '@app/store/empresa/active/active.reducer';
 import * as fromFacturaList from '@app/store/factura/list/list.reducer';
 import { getActiveEmpresa } from '@app/store/empresa/active/active.selectors';
-import { ListActions } from '@app/store/factura/list/list.actions';
+import { TableColumn } from '@app/models/frontend';
 
 @Component({
   selector: 'app-facturas',
@@ -18,7 +17,8 @@ export class FacturasComponent implements OnInit {
   isLoaded: boolean = false;
   activeEmpresa$!: Observable<Empresa | null>
   empresaId!: number;
-  facturasList!: Observable<Factura[] | null>
+  facturasList!: FacturaEmpresa[] | null
+  tableColumns !: TableColumn[];
 
   constructor(
     private activeEmpresaStore: Store<fromActiveEmpresa.ActiveEmpresaState>,
@@ -29,11 +29,56 @@ export class FacturasComponent implements OnInit {
     this.activeEmpresa$ = this.activeEmpresaStore.select(getActiveEmpresa) as Observable<Empresa | null>
     this.activeEmpresa$.subscribe((data) => {
       if (data?.id) {
-        this.isLoaded = true;
         this.empresaId = data.id;
-        this.facturaListStore.dispatch(ListActions.readAllStart({empresaId: data.id}))
+        // this.facturaListStore.dispatch(ListActions.readAllStart({empresaId: data.id}))
+        // this.facturasList$ = this.facturaListStore.select(getFacturas) as Observable<Factura[] | null>;
+        this.facturasList = data.facturas;
+        this.isLoaded = true;
       }
     })
+
+    this.initColumns();
+  }
+
+  initColumns(): void {
+    this.tableColumns = [
+      {
+        name: 'Numero',
+        dataKey: 'numero',
+        isSortable: true,
+      },
+      {
+        name: 'Fecha de expedición',
+        dataKey: 'fechaExpedicion',
+        isSortable: true,
+      },
+      {
+        name: 'Nombre cliente',
+        dataKey: 'cliente.nombre',
+        isSortable: false,
+      },
+      {
+        name: 'NIF cliente',
+        dataKey: 'cliente.email',
+        isSortable: false,
+      },
+
+      {
+        name: 'Subtotal',
+        dataKey: 'subtotal',
+        isSortable: true,
+      },
+      {
+        name: 'Iva',
+        dataKey: 'iva',
+        isSortable: true,
+      },
+      {
+        name: 'Total',
+        dataKey: 'total',
+        isSortable: true,
+      },
+    ];
   }
 
 }

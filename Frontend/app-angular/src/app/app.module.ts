@@ -16,6 +16,7 @@ import { environment } from 'environments/environment';
 import { NotificationModule } from './services';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './auth-interceptor';
+import { CamelCasePipe } from './pipes/camel-case.pipe';
 
 
 
@@ -61,7 +62,7 @@ const APP_DATE_FORMATS: MatDateFormats = {
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
     { provide: MAT_DATE_LOCALE, useValue: 'es-ES' },
-    { provide: MAT_DATE_LOCALE, useValue: APP_DATE_FORMATS }
+    { provide: MAT_DATE_LOCALE, useValue: APP_DATE_FORMATS },
   ],
   bootstrap: [AppComponent]
 })

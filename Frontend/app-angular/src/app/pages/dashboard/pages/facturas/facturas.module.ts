@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { FacturasRoutingModule } from './facturas-routing.module';
 import { FacturasComponent } from './facturas.component';
 import { ListModule } from '@app/store/factura/list/list.module';
+import { FacturasTableModule } from './components/facturas-table/facturas-table.module';
 
 
 @NgModule({
@@ -13,7 +14,8 @@ import { ListModule } from '@app/store/factura/list/list.module';
   imports: [
     CommonModule,
     FacturasRoutingModule,
-    ListModule
+    ListModule,
+    FacturasTableModule
   ]
 })
 export class FacturasModule { }
