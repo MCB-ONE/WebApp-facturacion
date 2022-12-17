@@ -18,6 +18,9 @@ import { FormFieldModule, InputModule } from '@app/shared';
     InputModule,
     FormFieldModule,
     MatButtonModule
+  ],
+  exports: [
+    LineaFacturaFormComponent
   ]
 })
 export class LineaFacturaFormModule { }

@@ -1,3 +1,4 @@
+import { ModalLineasFacturaModule } from './pages/dashboard/pages/facturas/components/modal-lineas-factura/modal-lineas-factura.module';
 import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -16,7 +17,7 @@ import { environment } from 'environments/environment';
 import { NotificationModule } from './services';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './auth-interceptor';
-import { CamelCasePipe } from './pipes/camel-case.pipe';
+import { DataPropertyGetterPipe } from './shared/layouts/table/pipes/data-property-getter.pipe';
 
 
 
@@ -37,7 +38,7 @@ const APP_DATE_FORMATS: MatDateFormats = {
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,
@@ -45,7 +46,7 @@ const APP_DATE_FORMATS: MatDateFormats = {
     RouterModule,
     BrowserAnimationsModule,
     HttpClientModule,
-
+    ModalLineasFacturaModule,
     MatNativeDateModule,
 
     NotificationModule.forRoot(),

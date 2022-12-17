@@ -1,0 +1,9 @@
+@import 'styles/colors.scss';
+
+.mat-flat-button, .mat-raised-button, .mat-fab, .mat-mini-fab {
+  background-color: $base-dark;
+  &:hover, &:active{
+    background-color: #acabab;
+  }
+}
+

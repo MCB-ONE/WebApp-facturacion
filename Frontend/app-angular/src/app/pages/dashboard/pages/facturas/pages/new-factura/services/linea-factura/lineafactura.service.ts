@@ -1,4 +1,5 @@
 import { EventEmitter, Injectable } from '@angular/core';
+import { LineaFactura } from '@app/models/backend/lineaFactura';
 import { ILineaFacturaItem } from '@app/models/frontend';
 
 @Injectable({
@@ -11,6 +12,24 @@ export class LineafacturaService {
   lineasFacturaUpdated: EventEmitter<ILineaFacturaItem[]> = new EventEmitter();
 
   constructor() { }
+
+  setLineas(lineasFactura: LineaFactura[]): void {
+    let index = 0;
+    lineasFactura.forEach(element => {
+      let newItem: ILineaFacturaItem = {
+        id: index,
+        concepto: element.concepto,
+        precioUnitario: element.precioUnitario,
+        cantidad: element.cantidad,
+        totalLinea: element.cantidad * element.precioUnitario
+      }
+
+      this.lineasFactura = [...this.lineasFactura, newItem]
+      index ++;
+    });
+
+    console.log(this.lineasFactura);
+  }
 
   getLineas(): ILineaFacturaItem[] {
     return this.lineasFactura;

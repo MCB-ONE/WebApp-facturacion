@@ -25,10 +25,6 @@ export class LineaFacturaFormComponent implements OnInit {
 
   ngOnInit(): void {
 
-    if(this.data){
-      console.log(this.data);
-    }
-
     this.form = this.fb.group({
       concepto: [null, {
         updateOn: 'blur', validators: [
@@ -67,6 +63,7 @@ export class LineaFacturaFormComponent implements OnInit {
         const updateLinea = { ...this.data.value, ...this.form.value };
         this.lineaFacturaService.updateLinea(updateLinea);
       } else {
+        this.form.value.cantidad = Number(this.form.value.cantidad);
         this.lineaFacturaService.addLinea(this.form.value);
       }
       this.dialogRef.close();
