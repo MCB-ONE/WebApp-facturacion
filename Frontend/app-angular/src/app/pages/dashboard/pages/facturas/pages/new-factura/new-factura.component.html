@@ -85,11 +85,10 @@
             </app-form-field>
           </div>
         </div>
-        <div class="app-form__section" *ngIf="lineasFactura">
+        <div class="app-form__section">
           <h3 class="app-form__section__title">Líneas de factura</h3>
-          <app-linea-factura *ngFor="let linea of lineasFactura" [item]="linea" (edit)="onEditLineaFactura($event)"
-            (delete)="onDeleteLineaFactura($event)"></app-linea-factura>
-
+          <app-lineas-factura-table>
+          </app-lineas-factura-table>
           <div class="app-form__actions">
             <button mat-flat-button color="accent" type="button" (click)="onAddLineaFactura()">Agregar línea</button>
           </div>

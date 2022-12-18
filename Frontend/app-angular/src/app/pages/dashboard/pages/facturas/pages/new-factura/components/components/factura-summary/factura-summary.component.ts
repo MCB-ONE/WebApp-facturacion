@@ -1,5 +1,6 @@
-import { Component, Input, OnChanges, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnDestroy, OnInit } from '@angular/core';
 import { ILineaFacturaItem } from '@app/models/frontend';
+import { Subscription } from 'rxjs';
 import { LineafacturaService } from '../../../services/linea-factura/lineafactura.service';
 
 @Component({
@@ -7,23 +8,26 @@ import { LineafacturaService } from '../../../services/linea-factura/lineafactur
   templateUrl: './factura-summary.component.html',
   styleUrls: ['./factura-summary.component.scss']
 })
-export class FacturaSummaryComponent implements OnInit {
+export class FacturaSummaryComponent implements OnInit, OnDestroy {
 
   lineasFactura!: ILineaFacturaItem[];
   subTotal: number = 0;
   totalIva : number = 0;
   total : number = 0;
 
+  private serviceSubscribe!: Subscription;
   private _iva!: number;
 
   @Input()
   set iva(value: number) {
       this._iva = value;
-      this.lineasFactura = this.lineaFacturaService.getLineas();
-      this.getSummary();
+      this.serviceSubscribe = this.lineaFacturaService.lineasFactura$.subscribe(res => {
+        this.lineasFactura = res;
+        this.getSummary();
+  })
 
   }
-  get minor(): number {
+  get iva(): number {
       return this._iva;
   }
 
@@ -31,13 +35,11 @@ export class FacturaSummaryComponent implements OnInit {
   constructor(private lineaFacturaService: LineafacturaService,) { }
 
   ngOnInit(): void {
-    this.lineasFactura = this.lineaFacturaService.getLineas();
-    this.lineaFacturaService.lineasFacturaUpdated.subscribe((data) => {
-        this.lineasFactura = data;
-        this.getSummary();
-        console.log(this.lineasFactura)
-    });
-    this.getSummary();
+    this.lineaFacturaService.getAll();
+    this.serviceSubscribe = this.lineaFacturaService.lineasFactura$.subscribe(res => {
+      this.lineasFactura = res;
+      this.getSummary();
+    })
   }
 
 
@@ -54,5 +56,8 @@ export class FacturaSummaryComponent implements OnInit {
     this.total = (suma * ivaCalc) + suma;
   }
 
+  ngOnDestroy(): void {
+    this.serviceSubscribe.unsubscribe();
+  }
 
 }

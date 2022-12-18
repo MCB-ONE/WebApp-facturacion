@@ -1,0 +1,18 @@
+@import 'styles/colors.scss';
+
+.mat-table{
+  .mat-icon{
+    margin-left: 0;
+  }
+  &__actions{
+    &__delete{
+      margin-left: 1rem;
+      .mat-icon{
+        color: $error;
+      }
+    }
+  }
+  .mat-column-actions{
+    padding-left: 2rem;
+  }
+}

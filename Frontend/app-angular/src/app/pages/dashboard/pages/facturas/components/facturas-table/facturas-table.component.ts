@@ -57,9 +57,6 @@ export class FacturasTableComponent implements OnInit, AfterViewInit  {
   }
 
   openDialog(factura: Factura): void {
-
-
-    this.lineasFacturaService.setLineas(factura.lineasFactura)
     const dialogRef = this.dialog.open(ModalLineasFacturaComponent, {
       width: '720px',
       data: factura

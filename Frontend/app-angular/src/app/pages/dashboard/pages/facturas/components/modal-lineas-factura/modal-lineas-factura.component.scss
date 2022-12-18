@@ -1,5 +1,4 @@
 @import 'styles/colors.scss';
-
 .lineas-list{
   &__header{
     padding-left: 8px;
@@ -25,24 +24,6 @@
     display: flex;
     justify-content: flex-end;
     gap: 1.5rem;
-  }
-}
-
-
-.mat-table{
-  .mat-icon{
-    margin-left: 0;
-  }
-  &__actions{
-    &__delete{
-      margin-left: 1rem;
-      .mat-icon{
-        color: $error;
-      }
-    }
-  }
-  .mat-column-actions{
-    padding-left: 2rem;
   }
 }
 

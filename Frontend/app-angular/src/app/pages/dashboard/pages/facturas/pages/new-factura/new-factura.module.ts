@@ -1,3 +1,4 @@
+import { LineasFacturaTableModule } from './../../components/lineas-factura-table/lineas-factura-table.module';
 import { MatDialogModule } from '@angular/material/dialog';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -7,7 +8,6 @@ import { NewFacturaComponent } from './new-factura.component';
 import { ControlsModule, DateModule, FormFieldModule, IndicatorsModule, InputModule, SpinnerModule, UserPhotoModule } from '@app/shared';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
-import { LineaFacturaComponent } from './components/linea-factura/linea-factura.component';
 import { LineaFacturaFormModule } from './components/linea-factura-form/linea-factura-form.module';
 import { LineafacturaService } from './services/linea-factura/lineafactura.service';
 import { FacturaSummaryComponent } from './components/components/factura-summary/factura-summary.component';
@@ -17,7 +17,6 @@ import { FormModule } from '@app/store/factura/form/form.module';
 @NgModule({
   declarations: [
     NewFacturaComponent,
-    LineaFacturaComponent,
     FacturaSummaryComponent
   ],
   imports: [
@@ -35,7 +34,8 @@ import { FormModule } from '@app/store/factura/form/form.module';
     SpinnerModule,
     MatDialogModule,
     LineaFacturaFormModule,
-    FormModule
+    FormModule,
+    LineasFacturaTableModule
   ],
   providers: [LineafacturaService],
 })

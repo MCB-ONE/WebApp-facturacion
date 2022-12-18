@@ -1,3 +1,4 @@
+import { LineasFacturaTableModule } from './../lineas-factura-table/lineas-factura-table.module';
 import { LineaFacturaFormModule } from './../../pages/new-factura/components/linea-factura-form/linea-factura-form.module';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -19,7 +20,8 @@ import { PipesModule } from '@app/pipes/pipes.module';
     MatIconModule,
     PipesModule,
     MatButtonModule,
-    LineaFacturaFormModule
+    LineasFacturaTableModule,
+    LineaFacturaFormModule,
   ],
 })
 export class ModalLineasFacturaModule { }

@@ -1,4 +1,4 @@
-import { LineaFactura } from './../../../../../../models/backend/lineaFactura/index';
+import { LineaFactura } from '@app/models/backend/lineaFactura/index';
 import { Factura } from '@app/models/backend/factura';
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
@@ -25,11 +25,11 @@ export class ModalLineasFacturaComponent implements OnInit {
     ) { }
 
   ngOnInit(): void {
-      this.dataSource.data = this.lineasFacturaService.getLineas();
-      this.lineasFacturaService.lineasFacturaUpdated.subscribe((data) => {
-        console.log(data);
-        this.dataSource.data  = data;
-      });
+      // this.dataSource.data = this.lineasFacturaService.getAll();
+      // this.lineasFacturaService.lineasFacturaUpdated.subscribe((data) => {
+      //   console.log(data);
+      //   this.dataSource.data  = data;
+      // });
   }
 
 
@@ -58,7 +58,7 @@ export class ModalLineasFacturaComponent implements OnInit {
     }
 
     onDelete(linea: ILineaFacturaItem): void {
-      this.lineasFacturaService.deleteLinea(linea);
+      //this.lineasFacturaService.deleteLinea(linea);
     }
 
 }

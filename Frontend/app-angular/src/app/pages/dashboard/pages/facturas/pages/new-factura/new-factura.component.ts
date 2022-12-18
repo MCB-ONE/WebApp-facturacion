@@ -59,12 +59,6 @@ export class NewFacturaComponent implements OnInit {
         this.facturasCount = data.facturas.length + 1;
       }
     })
-
-    this.lineasFactura = this.lineaFacturaService.getLineas();
-    this.lineaFacturaService.lineasFacturaUpdated.subscribe((data) => {
-      this.lineasFactura = data;
-    });
-
     this.form = this.fb.group({
       fechaExpedicion: [this.datepipe.transform(Date.now(), 'yyyy-MM-dd'), {
         updateOn: 'blur'
@@ -153,7 +147,6 @@ export class NewFacturaComponent implements OnInit {
     })
   }
 
-
   // Crud líneas factura
   onAddLineaFactura(): void {
     this.dialog.open(LineaFacturaFormComponent, {
@@ -161,19 +154,6 @@ export class NewFacturaComponent implements OnInit {
       height: 'fit-content',
       data: null
     });
-  }
-
-  onEditLineaFactura(value: LineaFactura): void {
-    this.dialog.open(LineaFacturaFormComponent, {
-      width: '650px',
-      height: 'fit-content',
-      data: { value }
-    });
-  }
-
-  onDeleteLineaFactura(linea: ILineaFacturaItem): void {
-    this.lineaFacturaService.deleteLinea(linea);
-    //this.lineaFacturaService.getLineas();
   }
 
   ivaChanged(event: any) {

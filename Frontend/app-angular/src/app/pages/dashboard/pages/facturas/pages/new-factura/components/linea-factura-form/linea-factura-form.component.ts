@@ -51,8 +51,9 @@ export class LineaFacturaFormComponent implements OnInit {
       ]
     });
 
-    if(this.data && this.data.value){
-      this.form.patchValue(this.data.value);
+    if(this.data){
+      console.log(this.data);
+      this.form.patchValue(this.data);
     }
   }
 
@@ -61,10 +62,10 @@ export class LineaFacturaFormComponent implements OnInit {
     if (this.form.valid) {
       if (this.data && this.data.value) {
         const updateLinea = { ...this.data.value, ...this.form.value };
-        this.lineaFacturaService.updateLinea(updateLinea);
+        this.lineaFacturaService.edit(updateLinea);
       } else {
         this.form.value.cantidad = Number(this.form.value.cantidad);
-        this.lineaFacturaService.addLinea(this.form.value);
+        this.lineaFacturaService.add(this.form.value);
       }
       this.dialogRef.close();
     } else {

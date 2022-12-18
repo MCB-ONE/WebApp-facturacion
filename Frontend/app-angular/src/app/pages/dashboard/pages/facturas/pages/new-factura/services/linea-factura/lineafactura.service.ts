@@ -1,82 +1,68 @@
-import { EventEmitter, Injectable } from '@angular/core';
 import { LineaFactura } from '@app/models/backend/lineaFactura';
+import { Injectable } from '@angular/core';
 import { ILineaFacturaItem } from '@app/models/frontend';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LineafacturaService {
 
-  lineasFactura: ILineaFacturaItem[] = [];
+  lineasFactura$: BehaviorSubject<ILineaFacturaItem[]> = new BehaviorSubject<ILineaFacturaItem[]>([]);
+  lineasFactura: ILineaFacturaItem[] = [
+    {
+      id: 1,
+      concepto: 'Coca',
+      precioUnitario: 0.5,
+      cantidad: 10,
+      totalLinea: 5
+    },
+    {
+      id: 2,
+      concepto: 'Fanta',
+      precioUnitario: 1.0,
+      cantidad: 10,
+      totalLinea: 10
+    }
+  ];
 
-  lineasFacturaUpdated: EventEmitter<ILineaFacturaItem[]> = new EventEmitter();
-
-  constructor() { }
-
-  setLineas(lineasFactura: LineaFactura[]): void {
-    let index = 0;
-    lineasFactura.forEach(element => {
-      let newItem: ILineaFacturaItem = {
-        id: index,
-        concepto: element.concepto,
-        precioUnitario: element.precioUnitario,
-        cantidad: element.cantidad,
-        totalLinea: element.cantidad * element.precioUnitario
-      }
-
-      this.lineasFactura = [...this.lineasFactura, newItem]
-      index ++;
-    });
-
-    console.log(this.lineasFactura);
+  constructor() {
   }
 
-  getLineas(): ILineaFacturaItem[] {
-    return this.lineasFactura;
+  getAll() {
+    this.lineasFactura$.next(this.lineasFactura);
   }
 
-  deleteLinea(linea: ILineaFacturaItem): void {
-    const i = this.lineasFactura.indexOf(linea);
-    this.lineasFactura.splice(i, 1);
+  add(linea: LineaFactura) {
 
-    this.lineasFacturaUpdated.emit(this.lineasFactura);
-  }
+    let id = this.lineasFactura.length + 1;
 
-  updateLinea(linea: ILineaFacturaItem): void {
-    const i = this.lineasFactura.indexOf(linea);
-    this.lineasFactura.splice(i, 1);
-
-    const total = linea.precioUnitario * linea.cantidad
-
-    const newLineaFactura: ILineaFacturaItem = {
-      id: linea.id,
+    const lineaFacturaItem: ILineaFacturaItem = {
+      id: id,
       concepto: linea.concepto,
       precioUnitario: linea.precioUnitario,
       cantidad: linea.cantidad,
-      totalLinea: total
+      totalLinea: linea.precioUnitario * linea.cantidad
     }
 
-    this.lineasFactura.push(newLineaFactura);
-
-    this.lineasFacturaUpdated.emit(this.lineasFactura);
+    this.lineasFactura.push(lineaFacturaItem);
+    this.lineasFactura$.next(this.lineasFactura);
   }
 
-  addLinea(lineaFactura: ILineaFacturaItem) {
-    let id = this.lineasFactura.length + 2;
-
-    const total = lineaFactura.precioUnitario * lineaFactura.cantidad
-
-    const newLineaFactura: ILineaFacturaItem = {
-      id: id,
-      concepto: lineaFactura.concepto,
-      precioUnitario: lineaFactura.precioUnitario,
-      cantidad: lineaFactura.cantidad,
-      totalLinea: total
-    }
-    this.lineasFactura = [...this.lineasFactura, newLineaFactura]
-
-    this.lineasFacturaUpdated.emit(this.lineasFactura);
+  edit(linea: ILineaFacturaItem) {
+    let findElem = this.lineasFactura.find(l => l.id == linea.id);
+    findElem!.concepto = linea.concepto;
+    findElem!.cantidad = linea.cantidad;
+    findElem!.precioUnitario = linea.precioUnitario;
+    findElem!.precioUnitario = linea.precioUnitario * linea.cantidad
+    this.lineasFactura$.next(this.lineasFactura);
   }
 
+  remove(id: number) {
+    this.lineasFactura = this.lineasFactura.filter(l => {
+      return l.id != id
+    });
+    this.lineasFactura$.next(this.lineasFactura);
+  }
 
 }
