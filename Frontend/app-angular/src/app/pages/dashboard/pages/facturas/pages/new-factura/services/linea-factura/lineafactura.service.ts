@@ -54,7 +54,7 @@ export class LineafacturaService {
     findElem!.concepto = linea.concepto;
     findElem!.cantidad = linea.cantidad;
     findElem!.precioUnitario = linea.precioUnitario;
-    findElem!.precioUnitario = linea.precioUnitario * linea.cantidad
+    findElem!.totalLinea = linea.precioUnitario * linea.cantidad
     this.lineasFactura$.next(this.lineasFactura);
   }
 

@@ -13,7 +13,7 @@ import { Subscription } from 'rxjs';
 })
 export class LineasFacturaTableComponent implements OnInit {
 
-  displayedColumns = ['concepto', 'precioUnitario', 'cantidad', 'totalLinea', 'acciones'];
+  displayedColumns = ['concepto', 'precioUnitario', 'cantidad', 'totalLinea', 'actions'];
   dataSource = new MatTableDataSource<any>([]);
   private serviceSubscribe!: Subscription;
 
@@ -26,7 +26,6 @@ export class LineasFacturaTableComponent implements OnInit {
 
     this.lineasFacturaService.getAll();
     this.serviceSubscribe = this.lineasFacturaService.lineasFactura$.subscribe(res => {
-      console.log(res);
       this.dataSource.data = res;
     })
   }
@@ -46,7 +45,6 @@ export class LineasFacturaTableComponent implements OnInit {
   }
 
   onDelete(id: number) {
-    console.log(id)
     this.lineasFacturaService.remove(id);
   }
 

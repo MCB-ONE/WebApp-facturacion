@@ -48,11 +48,14 @@ export class LineaFacturaFormComponent implements OnInit {
           Validators.pattern(regex.number)
         ]
       }
+      ],
+      id: [null, {
+        updateOn: 'blur'
+      }
       ]
     });
 
     if(this.data){
-      console.log(this.data);
       this.form.patchValue(this.data);
     }
   }
@@ -60,7 +63,7 @@ export class LineaFacturaFormComponent implements OnInit {
   onSubmit(): void {
 
     if (this.form.valid) {
-      if (this.data && this.data.value) {
+      if (this.data) {
         const updateLinea = { ...this.data.value, ...this.form.value };
         this.lineaFacturaService.edit(updateLinea);
       } else {

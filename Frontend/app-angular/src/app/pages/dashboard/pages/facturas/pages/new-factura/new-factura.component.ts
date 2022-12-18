@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { markFormGroupTouched, regex, regexErrors } from '@app/shared';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import * as fromActiveEmpresa from '@app/store/empresa/active/active.reducer';
 import { getActiveEmpresa } from '@app/store/empresa/active/active.selectors';
 import { IControlItem, ILineaFacturaItem } from '@app/models/frontend';
@@ -30,9 +30,10 @@ export class NewFacturaComponent implements OnInit {
   empresaId!: number;
   facturasCount!: number;
   ivaOptions!: IControlItem[];
-  empresaDirecciones: IControlItem[] = [];
   lineasFactura!: ILineaFacturaItem[];
   iva: number = 21;
+
+  private serviceSubscribe!: Subscription;
 
 
   constructor(
@@ -59,6 +60,13 @@ export class NewFacturaComponent implements OnInit {
         this.facturasCount = data.facturas.length + 1;
       }
     })
+
+    this.lineaFacturaService.getAll();
+    this.serviceSubscribe = this.lineaFacturaService.lineasFactura$.subscribe(res => {
+      this.lineasFactura = res;
+    })
+
+
     this.form = this.fb.group({
       fechaExpedicion: [this.datepipe.transform(Date.now(), 'yyyy-MM-dd'), {
         updateOn: 'blur'
@@ -142,8 +150,7 @@ export class NewFacturaComponent implements OnInit {
           Validators.required,
           Validators.pattern(regex.email)
         ]
-      }],
-      //lineasFactura: this.fb.array([])
+      }]
     })
   }
 
