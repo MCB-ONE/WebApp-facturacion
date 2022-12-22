@@ -30,8 +30,6 @@ export class FacturasComponent implements OnInit {
     this.activeEmpresa$.subscribe((data) => {
       if (data?.id) {
         this.empresaId = data.id;
-        // this.facturaListStore.dispatch(ListActions.readAllStart({empresaId: data.id}))
-        // this.facturasList$ = this.facturaListStore.select(getFacturas) as Observable<Factura[] | null>;
         this.facturasList = data.facturas;
         this.isLoaded = true;
       }

@@ -50,7 +50,6 @@ export class LoginComponent implements OnInit {
   onSubmit(): void{
     if(this.form.valid){
       const value = this.form.value;
-      console.log("Enviado");
       const emailPasswordCredentials: fromUsuario.EmailPasswordCredentials = {
         email: value.email,
         password: value.password

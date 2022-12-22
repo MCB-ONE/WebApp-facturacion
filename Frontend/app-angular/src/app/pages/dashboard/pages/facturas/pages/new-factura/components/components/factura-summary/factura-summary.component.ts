@@ -1,7 +1,7 @@
 import { Component, Input, OnChanges, OnDestroy, OnInit } from '@angular/core';
 import { ILineaFacturaItem } from '@app/models/frontend';
+import { LineafacturaService } from '@app/pages/dashboard/pages/facturas/services';
 import { Subscription } from 'rxjs';
-import { LineafacturaService } from '../../../services/linea-factura/lineafactura.service';
 
 @Component({
   selector: 'app-factura-summary',

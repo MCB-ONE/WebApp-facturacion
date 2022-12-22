@@ -1,3 +1,4 @@
+import { LineaFactura } from '@app/models/backend/lineaFactura';
 import { Factura } from "@app/models/backend/factura";
 import { createActionGroup, emptyProps, props } from "@ngrx/store";
 import { FacturaCreateRequest, FacturaForm, FacturaUpdateRequest } from "./form.models";
@@ -25,5 +26,10 @@ export const FormActions = createActionGroup({
     'Read start': props<{ facturaId: string }>(),
     'Read success': props<{ factura: Factura }>(),
     'Read error': props<{ error: string }>(),
+
+    //Actualizacion líneas
+    'Update lineas start': props<{ facturaId: number; lineasFactura: LineaFactura[] }>(),
+    'Update lineas success': props<{ factura: Factura }>(),
+    'Update lineas error': props<{ error: string }>(),
   },
 });

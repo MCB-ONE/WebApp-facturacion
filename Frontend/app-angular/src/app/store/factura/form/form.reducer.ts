@@ -2,6 +2,7 @@ import { Factura } from '@app/models/backend/factura/index';
 import { createReducer, on } from '@ngrx/store';
 import { FacturaForm } from './form.models';
 import { FormActions } from './form.actions';
+import { LineaFactura } from '@app/models/backend/lineaFactura';
 
 
 export type FacturaFormState = FacturaForm;
@@ -124,4 +125,27 @@ export const formReducer = createReducer(
       factura: null
     }
   }),
+    // Actualización líneas
+    on(FormActions.updateLineasStart, (state) => {
+      return {
+        ...state,
+        loading: true,
+        error: null,
+      }
+    }),
+    on(FormActions.updateLineasSuccess, (state) => {
+      return {
+        ...state,
+        loading: false,
+        error: null,
+      }
+    }),
+    on(FormActions.updateLineasError, (state, { error }) => {
+      return {
+        ...state,
+        loading: false,
+        error: error,
+        factura: null
+      }
+    }),
 )

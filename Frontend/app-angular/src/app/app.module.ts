@@ -1,6 +1,9 @@
 import { ModalLineasFacturaModule } from './pages/dashboard/pages/facturas/components/modal-lineas-factura/modal-lineas-factura.module';
 import { RouterModule } from '@angular/router';
-import { NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
+import { registerLocaleData } from '@angular/common';
+import localeEs from '@angular/common/locales/es';
+registerLocaleData(localeEs);
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -17,8 +20,6 @@ import { environment } from 'environments/environment';
 import { NotificationModule } from './services';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './auth-interceptor';
-import { DataPropertyGetterPipe } from './shared/layouts/table/pipes/data-property-getter.pipe';
-
 
 
 
@@ -38,7 +39,7 @@ const APP_DATE_FORMATS: MatDateFormats = {
 
 @NgModule({
   declarations: [
-    AppComponent,
+    AppComponent
   ],
   imports: [
     BrowserModule,
@@ -51,7 +52,7 @@ const APP_DATE_FORMATS: MatDateFormats = {
 
     NotificationModule.forRoot(),
 
-    StoreModule.forRoot(ROOT_REDUCERS,{
+    StoreModule.forRoot(ROOT_REDUCERS, {
       runtimeChecks: {
         strictActionImmutability: true,
         strictStateImmutability: true
@@ -64,6 +65,10 @@ const APP_DATE_FORMATS: MatDateFormats = {
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
     { provide: MAT_DATE_LOCALE, useValue: 'es-ES' },
     { provide: MAT_DATE_LOCALE, useValue: APP_DATE_FORMATS },
+    {
+      provide: LOCALE_ID,
+      useValue: 'es-ES'
+    }
   ],
   bootstrap: [AppComponent]
 })

@@ -1,17 +1,17 @@
 import { LineaFactura } from '@app/models/backend/lineaFactura/index';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog} from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
-import { LineafacturaService } from '../../pages/new-factura/services/linea-factura/lineafactura.service';
 import { LineaFacturaFormComponent } from './../../pages/new-factura/components/linea-factura-form/linea-factura-form.component';
 import { Subscription } from 'rxjs';
+import { LineafacturaService } from '../../services';
 
 @Component({
   selector: 'app-lineas-factura-table',
   templateUrl: './lineas-factura-table.component.html',
   styleUrls: ['./lineas-factura-table.component.scss']
 })
-export class LineasFacturaTableComponent implements OnInit {
+export class LineasFacturaTableComponent implements OnInit, OnDestroy {
 
   displayedColumns = ['concepto', 'precioUnitario', 'cantidad', 'totalLinea', 'actions'];
   dataSource = new MatTableDataSource<any>([]);
@@ -23,7 +23,6 @@ export class LineasFacturaTableComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-
     this.lineasFacturaService.getAll();
     this.serviceSubscribe = this.lineasFacturaService.lineasFactura$.subscribe(res => {
       this.dataSource.data = res;

@@ -10,23 +10,41 @@ export class LineafacturaService {
 
   lineasFactura$: BehaviorSubject<ILineaFacturaItem[]> = new BehaviorSubject<ILineaFacturaItem[]>([]);
   lineasFactura: ILineaFacturaItem[] = [
-    {
-      id: 1,
-      concepto: 'Coca',
-      precioUnitario: 0.5,
-      cantidad: 10,
-      totalLinea: 5
-    },
-    {
-      id: 2,
-      concepto: 'Fanta',
-      precioUnitario: 1.0,
-      cantidad: 10,
-      totalLinea: 10
-    }
+    // {
+    //   id: 1,
+    //   concepto: 'Coca',
+    //   precioUnitario: 0.5,
+    //   cantidad: 10,
+    //   totalLinea: 5
+    // },
+    // {
+    //   id: 2,
+    //   concepto: 'Fanta',
+    //   precioUnitario: 1.0,
+    //   cantidad: 10,
+    //   totalLinea: 10
+    // }
   ];
 
   constructor() {
+  }
+
+  setInitial(lineas: LineaFactura[]) {
+    let id = 1;
+
+    lineas.forEach(linea => {
+      const lineaFacturaItem: ILineaFacturaItem = {
+        id: id,
+        concepto: linea.concepto,
+        precioUnitario: linea.precioUnitario,
+        cantidad: linea.cantidad,
+        totalLinea: linea.precioUnitario * linea.cantidad
+      }
+      this.lineasFactura.push(lineaFacturaItem);
+      id++;
+    });
+
+    this.lineasFactura$.next(this.lineasFactura);
   }
 
   getAll() {
@@ -62,6 +80,14 @@ export class LineafacturaService {
     this.lineasFactura = this.lineasFactura.filter(l => {
       return l.id != id
     });
+
+    let idGen = 1;
+
+    this.lineasFactura.forEach(element => {
+      element.id = idGen;
+      idGen++;
+    });
+
     this.lineasFactura$.next(this.lineasFactura);
   }
 

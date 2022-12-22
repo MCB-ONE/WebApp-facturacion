@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { LineaFacturaFormComponent } from './linea-factura-form.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FormFieldModule, InputModule } from '@app/shared';
+import { FormModule } from '@app/store/factura/form/form.module';
 
 
 
@@ -17,7 +18,8 @@ import { FormFieldModule, InputModule } from '@app/shared';
     ReactiveFormsModule,
     InputModule,
     FormFieldModule,
-    MatButtonModule
+    MatButtonModule,
+    FormModule
   ],
   exports: [
     LineaFacturaFormComponent

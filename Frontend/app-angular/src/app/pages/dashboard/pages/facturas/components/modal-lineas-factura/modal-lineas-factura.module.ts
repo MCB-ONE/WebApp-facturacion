@@ -1,3 +1,4 @@
+import { SpinnerModule } from '@app/shared/indicators/spinner/spinner.module';
 import { LineasFacturaTableModule } from './../lineas-factura-table/lineas-factura-table.module';
 import { LineaFacturaFormModule } from './../../pages/new-factura/components/linea-factura-form/linea-factura-form.module';
 import { MatButtonModule } from '@angular/material/button';
@@ -22,6 +23,7 @@ import { PipesModule } from '@app/pipes/pipes.module';
     MatButtonModule,
     LineasFacturaTableModule,
     LineaFacturaFormModule,
+    SpinnerModule
   ],
 })
 export class ModalLineasFacturaModule { }

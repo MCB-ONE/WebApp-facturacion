@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ILineaFacturaItem } from '@app/models/frontend';
 import { markFormGroupTouched, regex, regexErrors } from '@app/shared';
-import { LineafacturaService } from '../../services/linea-factura/lineafactura.service';
+import { LineafacturaService } from '../../../../services/linea-factura/lineafactura.service';
 
 @Component({
   selector: 'app-linea-factura-form',

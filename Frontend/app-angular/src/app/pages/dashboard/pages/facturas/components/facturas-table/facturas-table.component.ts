@@ -5,7 +5,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { FacturaEmpresa } from '@app/models/backend';
 import { Factura } from '@app/models/backend/factura';
-import { LineafacturaService } from '../../pages/new-factura/services/linea-factura/lineafactura.service';
+import { LineafacturaService } from '../../services';
 import { ModalLineasFacturaComponent } from '../modal-lineas-factura/modal-lineas-factura.component';
 
 @Component({
@@ -63,8 +63,8 @@ export class FacturasTableComponent implements OnInit, AfterViewInit  {
     });
 
 
-    dialogRef.afterClosed().subscribe(data => {
-      console.log(data);
+    dialogRef.afterClosed().subscribe((data) => {
+      this.lineasFacturaService.lineasFactura = [];
     });
   }
 

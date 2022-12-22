@@ -1,6 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ILineaFacturaItem } from '@app/models/frontend/lineaFactura';
-import { LineafacturaService } from '../../services/linea-factura/lineafactura.service';
 
 @Component({
   selector: 'app-linea-factura',
@@ -14,7 +13,7 @@ export class LineaFacturaComponent implements OnInit {
   @Output() edit = new EventEmitter<ILineaFacturaItem>();
   @Output() delete = new EventEmitter<ILineaFacturaItem>();
 
-  constructor(private lineaFacturaService: LineafacturaService) { }
+  constructor() { }
 
   ngOnInit(): void {
   }

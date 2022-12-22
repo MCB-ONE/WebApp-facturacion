@@ -10,11 +10,10 @@ import { IControlItem, ILineaFacturaItem } from '@app/models/frontend';
 import { Empresa } from '@app/models/backend';
 import { LineaFacturaFormComponent } from './components/linea-factura-form/linea-factura-form.component';
 import { MatDialog } from '@angular/material/dialog';
-import { LineafacturaService } from './services/linea-factura/lineafactura.service';
-import { LineaFactura } from '@app/models/backend/lineaFactura';
 import { DatePipe } from '@angular/common';
 import { FormActions } from '@app/store/factura/form/form.actions';
 import {NotificationService} from '@app/services';
+import { LineafacturaService } from '../../services';
 
 @Component({
   selector: 'app-new-factura',
@@ -207,4 +206,7 @@ export class NewFacturaComponent implements OnInit {
   }
 
 
+  ngOnDestroy(): void {
+    this.serviceSubscribe.unsubscribe();
+  }
 }
