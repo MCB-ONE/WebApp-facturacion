@@ -7,18 +7,20 @@
     <div class="app-dashboard__main">
       <app-active-empresa-header [empresa]="empresa" title="Administrando"></app-active-empresa-header>
       <div class="counter-cards">
-        <app-counter-card title="Facturas de {{empresa.nombre}}" icon="list_alt" count="0"
+        <app-counter-card title="Facturas de {{empresa.nombre}}" icon="list_alt" count={{empresa.facturas.length}}
         countSubtitle="Facturas totales" link="/facturacion/facturas" linkText="Ver todas"
         buttonText="Generar factura" buttonLink="/facturacion/facturas/nueva"
         [haveButtonAction]="false"
         >
       </app-counter-card>
-      <app-counter-card title="Empresas gestionadas" icon="business" count="0"
-      countSubtitle="Empresas totales" link="/facturacion/empresas" linkText="Ver todas"
-      buttonText="Crear nueva" buttonLink="/facturacion/empresas/nueva"
-      [haveButtonAction]="false"
-      >
-      </app-counter-card>
+      <ng-container *ngIf="pagination$ | async as pagination">
+        <app-counter-card title="Empresas gestionadas" icon="business" count={{pagination.data.length}}
+        countSubtitle="Empresas totales" link="/facturacion/empresas" linkText="Ver todas"
+        buttonText="Crear nueva" buttonLink="/facturacion/empresas/nueva"
+        [haveButtonAction]="false"
+        >
+        </app-counter-card>
+      </ng-container>
       </div>
     </div>
     <div class="app-dashboard__sidebar">

@@ -30,10 +30,10 @@ export class ActiveEffects {
       ofType(ActiveActions.changeActiveEmpresaStart),
       map((action) => action.empresaId),
       switchMap((id: number) =>
-        this.httpClient.put<Empresa>(`${environment.url}/api/Empresa/activate/${id}`, null)
+        this.httpClient.put<Empresa>(`${environment.url}/api/Empresa/activar/${id}`, null)
           .pipe(
             tap(() => {
-              this.router.navigate(['/facturacion/welcome'])
+              this.router.navigate(['/facturacion/inicio'])
             }),
             map((empresa: Empresa) => ActiveActions.changeActiveEmpresaSuccess({ empresa })
             ),

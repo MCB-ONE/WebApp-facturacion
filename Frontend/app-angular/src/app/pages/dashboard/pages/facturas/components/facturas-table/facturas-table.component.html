@@ -17,13 +17,13 @@
         <td mat-cell *matCellDef="let row">{{ row.cliente.nif }}</td>
       </ng-container>
       <ng-container *ngSwitchCase="'subtotal'">
-        <td mat-cell *matCellDef="let row">{{ row[column] | currency:'EUR' }}</td>
+        <td mat-cell *matCellDef="let row">{{ row[column] | currency:'EUR':'symbol':'4.2-2' }}</td>
       </ng-container>
       <ng-container *ngSwitchCase="'iva'">
         <td mat-cell *matCellDef="let row">{{ row[column]}}%</td>
       </ng-container>
       <ng-container *ngSwitchCase="'total'">
-        <td mat-cell *matCellDef="let row">{{ row[column] | currency:'EUR' }}</td>
+        <td mat-cell *matCellDef="let row">{{ row[column] | currency:'EUR':'symbol':'4.2-2' }}</td>
       </ng-container>
       <ng-container *ngSwitchCase="'lineasFactura'">
         <td mat-cell *matCellDef="let row">
