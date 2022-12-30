@@ -74,23 +74,43 @@ namespace WebApi.Controllers
             return Ok(_mapper.Map<FacturaDto>(result));
         }
 
-        [HttpPut("actualizar/{id}")]
+        [HttpPut("lineas/{id}")]
         [Authorize]
-        public async Task<ActionResult<List<FacturaDto>>> UpdateFactura(int id, FacturaCreateDto facturaUpdated)
+        public async Task<ActionResult<FacturaDto>> UpdateLineasFactura(int id, HashSet<LineasFacturaCreateDto> lineasFacturaUpdate)
         {
 
             var emailUsuario = HttpContext.User?.Claims?.FirstOrDefault(x => x.Type == ClaimTypes.Email)?.Value;
 
-            var result = await _repository.UpdateFacturaAsync(id, _mapper.Map<Factura>(facturaUpdated));
+            var lineasFactura = _mapper.Map<HashSet<LineaFactura>>(lineasFacturaUpdate);
 
-            if (result == 0)
+            var result = await _repository.UpdateLienasFacturaAsync(id, lineasFactura);
+
+            if (result == null)
             {
                 throw new Exception("No se ha podido actualizar la factura");
             }
 
-            return Ok(facturaUpdated);
+            return Ok(_mapper.Map<Factura>(result));
 
         }
+
+        //[HttpPut("actualizar/{id}")]
+        //[Authorize]
+        //public async Task<ActionResult<List<FacturaDto>>> UpdateFactura(int id, FacturaCreateDto facturaUpdated)
+        //{
+
+        //    var emailUsuario = HttpContext.User?.Claims?.FirstOrDefault(x => x.Type == ClaimTypes.Email)?.Value;
+
+        //    var result = await _repository.UpdateFacturaAsync(id, _mapper.Map<Factura>(facturaUpdated));
+
+        //    if (result == 0)
+        //    {
+        //        throw new Exception("No se ha podido actualizar la factura");
+        //    }
+
+        //    return Ok(facturaUpdated);
+
+        //}
 
         [HttpDelete("eliminar/{id}")]
         [Authorize]

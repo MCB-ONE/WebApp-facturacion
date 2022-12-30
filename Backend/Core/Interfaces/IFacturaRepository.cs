@@ -11,6 +11,9 @@ namespace Core.Interfaces
     {
         Task<Factura> AddFacturaAsync(string emailUsuario, Factura factura, HashSet<LineaFactura> lineasFactura);
 
+        Task<Factura> UpdateLienasFacturaAsync(int id, HashSet<LineaFactura> lineasFactura);
+
+
         Task<int> UpdateFacturaAsync(int id, Factura factura);
 
         Task<int> DeleteFacturaAsync(int facturaId,string emailUsuario);

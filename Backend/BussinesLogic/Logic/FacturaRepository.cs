@@ -121,6 +121,52 @@ namespace BussinesLogic.Logic
             return await _context.SaveChangesAsync();
         }
 
+        public async Task<Factura> UpdateLienasFacturaAsync(int id, HashSet<LineaFactura> lineasFactura)
+        {
+            _logger.LogWarning($"{nameof(EmpresaRepository)} - {nameof(UpdateLienasFacturaAsync)} - Warning Level Log");
+            _logger.LogError($"{nameof(EmpresaRepository)} - {nameof(UpdateLienasFacturaAsync)} - Error Level Log");
+            _logger.LogCritical($"{nameof(EmpresaRepository)} - {nameof(UpdateLienasFacturaAsync)} - Critical Log Level");
+
+            var dbFactura = await _context.Set<Factura>().FindAsync(id);
+
+            if (lineasFactura is null || lineasFactura.Count == 0 || dbFactura is null)
+            {
+                return null;
+            };
+
+
+
+            // Subtotal factura acumulado
+            decimal subTotalFactura = 0;
+
+            foreach (var item in lineasFactura)
+            {
+                // Calcular total linea factura
+                var totalLinea = item.PrecioUnitario * item.Cantidad;
+                item.Total = totalLinea;
+
+                // Calcular total factura acumulado
+                subTotalFactura = subTotalFactura + totalLinea;
+            }
+
+            dbFactura.Subtotal = subTotalFactura;
+
+            //Calcular iva y sumar a total factura
+            decimal iva = Convert.ToDecimal(dbFactura.Iva) / 100;
+
+            dbFactura.Total = (iva * dbFactura.Subtotal) + dbFactura.Subtotal;
+
+            dbFactura.LineasFactura = lineasFactura;
+            dbFactura.UpdatedAt = DateTime.Now;
+
+            _context.Set<Factura>().Attach(dbFactura);
+            _context.Entry(dbFactura).State = EntityState.Modified;
+
+            await _context.SaveChangesAsync();
+
+            return dbFactura;
+        }
+
         public async Task<int> DeleteFacturaAsync(int facturaId, string emailUsuario)
         {
             var factura = await _context.Set<Factura>().FindAsync(facturaId);
@@ -141,5 +187,6 @@ namespace BussinesLogic.Logic
 
             return await _context.SaveChangesAsync();   
         }
+
     }
 }

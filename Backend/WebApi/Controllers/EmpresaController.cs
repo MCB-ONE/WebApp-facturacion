@@ -27,6 +27,30 @@ namespace WebApi.Controllers
         public async Task<ActionResult<Pagination<EmpresaDto>>> GetAllEmpresasByUsuarioEmail([FromQuery] SpecificationParams empresaParams)
         {
             var emailUsuario = HttpContext.User?.Claims?.FirstOrDefault(x => x.Type == ClaimTypes.Email)?.Value;
+            var isAdmin = HttpContext.User?.Claims?.FirstOrDefault(x => x.Type == ClaimTypes.Role)?.Value;
+
+            // Si es Admin devuleve todas las empresas de todos los usuarios
+            if (isAdmin == "ADMIN")
+            {
+                var allEmpresas = await _repository.GetAllAsync();
+
+                var totalAllEmpresas = allEmpresas.Count();
+
+                var allRounded = Math.Ceiling(Convert.ToDecimal(totalAllEmpresas / empresaParams.PageSize));
+                var allTotalPages = Convert.ToInt32(allRounded);
+
+                var allData = _mapper.Map<IReadOnlyList<Empresa>, IReadOnlyList<EmpresaDto>>(allEmpresas);
+
+                return Ok(new Pagination<EmpresaDto>
+                {
+                    Count = totalAllEmpresas,
+                    PageCount = allTotalPages,
+                    Data = allData,
+                    PageIndex = empresaParams.PageIndex,
+                    PageSize = empresaParams.PageSize
+                });
+            }
+
 
             var spec = new EmpresaWithFacturasSpecification(emailUsuario, empresaParams);
 
@@ -56,10 +80,21 @@ namespace WebApi.Controllers
         public async Task<ActionResult<EmpresaDto>> GetEmpresaByIdAndUsuarioEmail(int id)
         {
             var emailUsuario = HttpContext.User?.Claims?.FirstOrDefault(x => x.Type == ClaimTypes.Email)?.Value;
+            var isAdmin = HttpContext.User?.Claims?.FirstOrDefault(x => x.Type == ClaimTypes.Role)?.Value;
 
             var spec = new EmpresaWithFacturasSpecification(id, emailUsuario);
 
             var empresa = await _repository.GetByIdWithSpecAsync(spec);
+
+            // Admin sin fitro propietario
+            if (isAdmin == "ADMIN")
+            {
+                var adminSpec = new EmpresaWithFacturasSpecification(id);
+
+                var adminEmpresa = await _repository.GetByIdWithSpecAsync(adminSpec);
+
+                return Ok(_mapper.Map<EmpresaDto>(adminEmpresa));
+            }
 
             return Ok(_mapper.Map<EmpresaDto>(empresa));
         }
@@ -146,13 +181,25 @@ namespace WebApi.Controllers
         public async Task<IActionResult> DeleteEmpresa(int id)
         {
             var emailUsuario = HttpContext.User?.Claims?.FirstOrDefault(x => x.Type == ClaimTypes.Email)?.Value;
+            var isAdmin = HttpContext.User?.Claims?.FirstOrDefault(x => x.Type == ClaimTypes.Role)?.Value;
+            var result = 0;
 
-            var result = await _repository.DeleteEmpresaAsync(id, emailUsuario);
+            // Admin sin filtro propietario
+            if (isAdmin == "ADMIN")
+            {
+                result = await _repository.Delete(id);
+            }
+            else
+            {
+                result = await _repository.DeleteEmpresaAsync(id, emailUsuario);
+            }
 
             if (result == 0)
             {
                 return BadRequest("No se ha podido borrar la empresa.");
             }
+
+
 
             return Ok();
 
