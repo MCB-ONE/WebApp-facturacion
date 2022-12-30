@@ -1,8 +1,8 @@
-import { Pagination } from "./list.models";
+import { Empresa } from './../../../models/backend/empresa/index';
 import { Injectable } from "@angular/core";
 import { Actions, ofType, createEffect } from "@ngrx/effects";
 import { of } from "rxjs";
-import { map, catchError, switchMap } from "rxjs/operators";
+import { map, catchError, switchMap, mergeMap } from "rxjs/operators";
 import { HttpClient } from "@angular/common/http";
 import { environment } from "environments/environment";
 import { ListActions } from "./list.actions";
@@ -11,20 +11,19 @@ import { ListActions } from "./list.actions";
 export class ListEffects {
 
   readAll$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(ListActions.readAllStart),
-      map((action) => action.paramsUrl),
-      switchMap((request: string) =>
-        this.httpClient.get<Pagination>(`${environment.url}/api/Empresa?${request}`)
-          .pipe(
-            map((pagination: any) =>
-            ListActions.readAllSuccess({ pagination }),
-            ),
-            catchError(error => of(ListActions.readAllError({ error })))
-          )
-      )
+  this.actions$.pipe(
+    ofType(ListActions.readAllStart),
+    mergeMap(() =>
+      this.httpClient.get<Empresa[]>(`${environment.url}/api/Empresa?`)
+        .pipe(
+          map((data: any) =>
+          ListActions.readAllSuccess({ data }),
+          ),
+          catchError(error => of(ListActions.readAllError({ error })))
+        )
     )
-  );
+  )
+);
 
   constructor(
     private actions$: Actions,

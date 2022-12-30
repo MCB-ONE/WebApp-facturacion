@@ -1,20 +1,18 @@
 import { createReducer, on } from '@ngrx/store';
 import { HttpParams } from "@angular/common/http";
-import { Pagination } from './list.models';
 import { ListActions } from './list.actions';
+import { Empresa } from '@app/models/backend';
 
 
 
 export interface ListState {
-  pagination: Pagination | null;
-  requestPagination: HttpParams | null;
+  empresas: Empresa[] | null;
   loading: boolean | null;
   error: string | null;
 }
 
 export const initialState: ListState = {
-  pagination: null,
-  requestPagination: null,
+  empresas: null,
   loading: null,
   error: null
 }
@@ -22,19 +20,18 @@ export const initialState: ListState = {
 
 export const listReducer = createReducer(
   initialState,
-  on(ListActions.readAllStart, (state, { requestPagination }) => {
+  on(ListActions.readAllStart, (state) => {
     return {
       ...state,
       loading: true,
-      error: null,
-      requestPagination: requestPagination
+      error: null
     }
   }),
-  on(ListActions.readAllSuccess, (state, { pagination }) => {
+  on(ListActions.readAllSuccess, (state, { data }) => {
     return {
       ...state,
       loading: false,
-      pagination: pagination,
+      empresas: data,
       error: null
     }
   }),

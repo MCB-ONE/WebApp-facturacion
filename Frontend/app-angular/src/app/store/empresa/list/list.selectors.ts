@@ -8,12 +8,7 @@ const getListState = createFeatureSelector<ListState>(empresaListFeatureKey)
 
 export const getEmpresas = createSelector(
   getListState,
-  (state: ListState) => state.pagination
-)
-
-export const getPaginatioRequest = createSelector(
-  getListState,
-  (state: ListState) => state.requestPagination
+  (state: ListState) => state.empresas
 )
 
 export const getLoading = createSelector(

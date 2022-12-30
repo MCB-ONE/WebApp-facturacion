@@ -2,8 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Empresa } from '@app/models/backend/empresa';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { HttpParams } from '@angular/common/http';
-import { Pagination } from '@app/store/empresa/list/list.models';
 import * as fromActiveEmpresa from '@app/store/empresa/active/active.reducer';
 import * as fromEmpresasList from '@app/store/empresa/list/list.reducer';
 import { ActiveActions } from '@app/store/empresa/active/active.actions';
@@ -16,8 +14,7 @@ import { getLoading as getListLoading, getEmpresas } from '@app/store/empresa/li
   styleUrls: ['./welcome.component.scss']
 })
 export class WelcomeComponent implements OnInit {
-  params = new HttpParams();
-  pagination$ !: Observable<Pagination>
+  empresas$ !: Observable<Empresa[]>
   activeEmpresa$ !: Observable<Empresa | null>
   isActiveLoading$ !: Observable<boolean | null>;
   isListLoading$ !: Observable<boolean | null>;
@@ -32,19 +29,12 @@ export class WelcomeComponent implements OnInit {
     this.isActiveLoading$ = this.storeActiveEmpresa.select(getLoading);
 
     //Seleccionar empresas y seleccionar empresa activa incial
-    this.params = this.params.set('pageIndex', 1);
-    this.params = this.params.set('pageSize', 3);
-    this.params = this.params.set('sort', 'idDesc');
-
-    this.storeEmpresasList.dispatch(ListActions.readAllStart({
-      requestPagination: this.params,
-      paramsUrl: this.params.toString()
-    }))
+    this.storeEmpresasList.dispatch(ListActions.readAllStart());
 
     this.storeActiveEmpresa.dispatch(ActiveActions.readActiveStart());
 
     this.activeEmpresa$ = this.storeActiveEmpresa.select(getActiveEmpresa) as Observable<Empresa | null>
-    this.pagination$ = this.storeEmpresasList.select(getEmpresas) as Observable<Pagination>
+    this.empresas$ = this.storeEmpresasList.select(getEmpresas) as Observable<Empresa[]>
   }
 
   onEmpresaSelect(empresaId: number) {

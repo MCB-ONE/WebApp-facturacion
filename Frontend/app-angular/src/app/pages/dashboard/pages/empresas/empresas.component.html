@@ -8,7 +8,7 @@
   <ng-container *ngIf="(activeEmpresa$ | async) as empresa">
     <div class="app-dashboard-main">
       <app-active-empresa-header [empresa]="empresa" title="Administrando"></app-active-empresa-header>
-      <app-empresas-table *ngIf="(pagination$ | async)  as pagination" [tableData]="pagination.data"></app-empresas-table>
+      <app-empresas-table *ngIf="(empresas$ | async)  as empresas" [tableData]="empresas"></app-empresas-table>
     </div>
   </ng-container>
 </div>

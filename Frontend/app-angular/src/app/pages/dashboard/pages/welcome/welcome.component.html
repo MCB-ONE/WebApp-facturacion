@@ -13,8 +13,8 @@
         [haveButtonAction]="false"
         >
       </app-counter-card>
-      <ng-container *ngIf="pagination$ | async as pagination">
-        <app-counter-card title="Empresas gestionadas" icon="business" count={{pagination.data.length}}
+      <ng-container *ngIf="empresas$ | async as empresas">
+        <app-counter-card title="Empresas gestionadas" icon="business" count={{empresas.length}}
         countSubtitle="Empresas totales" link="/facturacion/empresas" linkText="Ver todas"
         buttonText="Crear empresa" buttonLink="/facturacion/empresas/nueva"
         [haveButtonAction]="false"
@@ -24,7 +24,7 @@
       </div>
     </div>
     <div class="app-dashboard__sidebar">
-      <app-empresa-list *ngIf="pagination$ | async as pagination" [empresas]="pagination.data"
+      <app-empresa-list *ngIf="empresas$ | async as empresas" [empresas]="empresas"
         (selectEmpresa)="onEmpresaSelect($event)"></app-empresa-list>
     </div>
   </ng-container>

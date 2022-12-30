@@ -76,7 +76,7 @@ export class UsuarioEffects {
       switchMap(async () => localStorage.getItem('token')),
       switchMap(token => {
         if (token) {
-          return this.httpClient.get<UsuarioResponse>(`${environment.url}/api/Usuario`)
+          return this.httpClient.get<UsuarioResponse>(`${environment.url}/api/Usuario/recuperar`)
             .pipe(
               tap({
                 next: (user: UsuarioResponse) => {
