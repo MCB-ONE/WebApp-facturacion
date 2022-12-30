@@ -1,1 +1,14 @@
-<p>empresas works!</p>
+<div class="app-dashboard">
+  <!-- Cliente nuevo o sin empresas creadas -->
+  <ng-container *ngIf="!(activeEmpresa$ | async)">
+    <div class="app-dashboard-main">
+      <app-active-empresa-header ></app-active-empresa-header>
+    </div>
+  </ng-container>
+  <ng-container *ngIf="(activeEmpresa$ | async) as empresa">
+    <div class="app-dashboard-main">
+      <app-active-empresa-header [empresa]="empresa" title="Administrando"></app-active-empresa-header>
+      <app-empresas-table *ngIf="(pagination$ | async)  as pagination" [tableData]="pagination.data"></app-empresas-table>
+    </div>
+  </ng-container>
+</div>

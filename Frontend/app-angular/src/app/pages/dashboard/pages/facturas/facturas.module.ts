@@ -1,3 +1,5 @@
+import { MatButtonModule } from '@angular/material/button';
+import { ActiveEmpresaHeaderModule } from './../../components/active-empresa-header/active-empresa-header.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -15,7 +17,9 @@ import { FacturasTableModule } from './components/facturas-table/facturas-table.
     CommonModule,
     FacturasRoutingModule,
     ListModule,
-    FacturasTableModule
+    FacturasTableModule,
+    ActiveEmpresaHeaderModule,
+    MatButtonModule
   ]
 })
 export class FacturasModule { }

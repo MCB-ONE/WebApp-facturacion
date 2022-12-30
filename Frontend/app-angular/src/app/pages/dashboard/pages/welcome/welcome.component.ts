@@ -30,7 +30,6 @@ export class WelcomeComponent implements OnInit {
 
     this.isListLoading$ = this.storeEmpresasList.select(getListLoading);
     this.isActiveLoading$ = this.storeActiveEmpresa.select(getLoading);
-    this.activeEmpresa$ = this.storeActiveEmpresa.select(getActiveEmpresa) as Observable<Empresa | null>
 
     //Seleccionar empresas y seleccionar empresa activa incial
     this.params = this.params.set('pageIndex', 1);

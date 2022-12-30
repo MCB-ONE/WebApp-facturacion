@@ -1,3 +1,5 @@
+import { EmpresasTableModule } from './components/empresas-table/empresas-table.module';
+import { ActiveEmpresaHeaderModule } from './../../components/active-empresa-header/active-empresa-header.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -13,7 +15,9 @@ import { ListModule } from '@app/store/empresa/list/list.module';
   imports: [
     CommonModule,
     EmpresasRoutingModule,
-    ListModule
+    ListModule,
+    ActiveEmpresaHeaderModule,
+    EmpresasTableModule
   ]
 })
 export class EmpresasModule { }
