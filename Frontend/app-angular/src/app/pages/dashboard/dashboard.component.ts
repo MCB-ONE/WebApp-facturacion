@@ -4,7 +4,6 @@ import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import * as fromRoot from '@app/store';
 import * as fromUsuario from '@app/store/usuario';
-import { HttpParams } from '@angular/common/http';
 import { menuItem } from './components/menu-list/menu-list.component';
 
 

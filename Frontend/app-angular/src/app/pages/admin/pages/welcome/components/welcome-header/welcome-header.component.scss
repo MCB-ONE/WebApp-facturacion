@@ -1,0 +1,26 @@
+@import 'styles/colors.scss';
+
+.welcome-header {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  &__icon {
+    display: flex;
+    color: white;
+    background-color: $primary;
+    justify-content: center;
+    align-items: center;
+    padding: 0 1rem;
+    border-radius: var(--mat-focus-indicator-border-radius, 4px);
+  }
+
+  &__text {
+    &__title {
+      margin: 0 0 8px;
+    }
+
+    &__subtitle {
+      color: rgba(0, 0, 0, 0.54);
+    }
+  }
+}

@@ -8,6 +8,7 @@ import { ActiveActions } from '@app/store/empresa/active/active.actions';
 import { ListActions } from '@app/store/empresa/list/list.actions';
 import { getActiveEmpresa, getLoading } from '@app/store/empresa/active/active.selectors';
 import { getLoading as getListLoading, getEmpresas } from '@app/store/empresa/list/list.selectors';
+
 @Component({
   selector: 'app-welcome',
   templateUrl: './welcome.component.html',

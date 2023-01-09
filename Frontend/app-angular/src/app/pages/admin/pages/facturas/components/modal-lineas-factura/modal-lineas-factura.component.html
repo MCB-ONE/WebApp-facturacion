@@ -1,0 +1,18 @@
+<app-spinner *ngIf="!isLoaded"></app-spinner>
+<div *ngIf="isLoaded" class="lineas-list">
+  <div class="lineas-list__header">
+    <h2 class="lineas-list__header__title">Lineas de factura nº{{data.numero}}</h2>
+    <h4 class="lineas-list__header__subtitle">{{data.cliente.nombre}} - {{data.fechaExpedicion | date: 'dd-MM-yyyy' }}
+    </h4>
+  </div>
+  <div class="lineas-list__content">
+    <app-lineas-factura-table></app-lineas-factura-table>
+    <div class="lineas-list__content__actions">
+      <button mat-flat-button type="button" (click)="onAdd()">Agregar línea</button>
+    </div>
+  </div>
+  <div class="lineas-list__footer">
+    <button mat-flat-button color="primary" type="button"  (click)="onUpdate()">Actualizar</button>
+    <button mat-flat-button type="button" color="accent" (click)="onClose()">Cancelar</button>
+  </div>
+</div>

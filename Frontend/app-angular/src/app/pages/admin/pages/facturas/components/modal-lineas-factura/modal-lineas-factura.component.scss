@@ -1,0 +1,31 @@
+@import 'styles/colors.scss';
+.lineas-list{
+  &__header{
+    padding-left: 8px;
+    border-left: 4px solid $primary;
+    &__title{
+      margin-bottom: 8px;
+    }
+    &__subtitle{
+      color: rgba(0, 0, 0, 0.54);
+    }
+  }
+
+  &__content{
+    padding-bottom: 2rem;
+    border-bottom: 1px solid $secondary;
+    &__actions{
+      margin-top: 1.5rem;
+    }
+  }
+
+  &__footer{
+    margin-top: 1.5rem;
+    display: flex;
+    justify-content: flex-end;
+    gap: 1.5rem;
+  }
+}
+
+
+

@@ -2,25 +2,22 @@
   <div class="spinner" *ngIf="(isActiveLoading$ | async) && (isListLoading$ | async)">
     <app-spinner></app-spinner>
   </div>
+
   <!-- Cliente con empresas y empresas activas -->
   <ng-container *ngIf="activeEmpresa$ | async as empresa">
     <div class="app-dashboard__main">
       <app-active-empresa-header [empresa]="empresa" title="Administrando"></app-active-empresa-header>
       <div class="counter-cards">
         <app-counter-card title="Facturas de {{empresa.nombre}}" icon="list_alt" count={{empresa.facturas.length}}
-        countSubtitle="Facturas totales" link="/facturacion/facturas" linkText="Ver todas"
-        buttonText="Generar factura" buttonLink="/facturacion/facturas/nueva"
-        [haveButtonAction]="false"
-        >
-      </app-counter-card>
-      <ng-container *ngIf="empresas$ | async as empresas">
-        <app-counter-card title="Empresas gestionadas" icon="business" count={{empresas.length}}
-        countSubtitle="Empresas totales" link="/facturacion/empresas" linkText="Ver todas"
-        buttonText="Crear empresa" buttonLink="/facturacion/empresas/nueva"
-        [haveButtonAction]="false"
-        >
+          countSubtitle="Facturas totales" link="/facturacion/facturas" linkText="Ver todas"
+          buttonText="Generar factura" buttonLink="/facturacion/facturas/nueva" [haveButtonAction]="false">
         </app-counter-card>
-      </ng-container>
+        <ng-container *ngIf="empresas$ | async as empresas">
+          <app-counter-card title="Empresas gestionadas" icon="business" count={{empresas.length}}
+            countSubtitle="Empresas totales" link="/facturacion/empresas" linkText="Ver todas"
+            buttonText="Crear empresa" buttonLink="/facturacion/empresas/nueva" [haveButtonAction]="false">
+          </app-counter-card>
+        </ng-container>
       </div>
     </div>
     <div class="app-dashboard__sidebar">
@@ -32,7 +29,7 @@
   <!-- Cliente nuevo o sin empresas creadas -->
   <ng-container *ngIf="!(activeEmpresa$ | async)">
     <div class="app-dashboard-main">
-      <app-active-empresa-header ></app-active-empresa-header>
+      <app-active-empresa-header></app-active-empresa-header>
     </div>
   </ng-container>
 </div>

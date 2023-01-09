@@ -1,0 +1,7 @@
+<mat-nav-list>
+  <h4 class="mat-nav-list-header">ADMINISTRADOR</h4>
+  <a *ngFor="let item of menuItems" mat-list-item [routerLink]="item.name">
+    <mat-icon> {{item.icon}} </mat-icon>
+    <span class="navegation-list-label">{{item.name| titlecase}} </span>
+  </a>
+</mat-nav-list>

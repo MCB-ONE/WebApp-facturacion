@@ -1,0 +1,50 @@
+@import "styles/colors.scss";
+.header {
+  border-top: 2px solid $primary;
+  padding: 16px 5%;
+  display: flex;
+  justify-content: space-between;
+  background-color: $base-light;
+
+  .header-button {
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+    vertical-align: middle;
+  }
+  &__title {
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+    vertical-align: middle;
+    .logo{
+      height: 22px;
+    }
+  }
+
+  &__navigation {
+    display: inline-flex;
+    align-items: center;
+    text-transform: uppercase;
+  }
+
+  &__buttons {
+    display: inline-flex;
+    align-items: center;
+  }
+
+  &__profile{
+    display: flex;
+    align-items: center;
+    span{
+      margin-right: 1rem;
+    }
+    &_image{
+      width: 36px;
+      margin-right: 1rem;
+      img{
+        border-radius: 50%;
+      }
+    }
+  }
+}

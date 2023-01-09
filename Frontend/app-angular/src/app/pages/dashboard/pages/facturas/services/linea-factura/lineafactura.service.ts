@@ -1,12 +1,12 @@
 import { LineaFactura } from '@app/models/backend/lineaFactura';
-import { Injectable } from '@angular/core';
+import { Injectable, OnDestroy } from '@angular/core';
 import { ILineaFacturaItem } from '@app/models/frontend';
 import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
-export class LineafacturaService {
+export class LineafacturaService implements OnDestroy{
 
   lineasFactura$: BehaviorSubject<ILineaFacturaItem[]> = new BehaviorSubject<ILineaFacturaItem[]>([]);
   lineasFactura: ILineaFacturaItem[] = [
@@ -27,6 +27,10 @@ export class LineafacturaService {
   ];
 
   constructor() {
+    console.log("SERVCIO INICIADO")
+  }
+  ngOnDestroy(): void {
+    console.log("SERVCIO DESTROY")
   }
 
   setInitial(lineas: LineaFactura[]) {

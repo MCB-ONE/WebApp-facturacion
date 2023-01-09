@@ -1,0 +1,28 @@
+<mat-toolbar class="header">
+  <div class="header__title">
+    <img class="logo" src="/assets/logos/logo-letras-facturapp-180x100.svg" routerLink="auth/login" routerLinkActive="app-a_active" alt="">
+  </div>
+  <div class="header__profile">
+    <span>{{usuario ? usuario.nombre + " " + usuario.apellido : null}}</span>
+    <div class="header__profile_image">
+      <img src="../../../assets/user-image-default.svg" alt="">
+    </div>
+    <button mat-icon-button [matMenuTriggerFor]="profileMenu" aria-label="Example icon-button with a menu">
+      <mat-icon>keyboard_arrow_down</mat-icon>
+    </button>
+    <mat-menu #profileMenu="matMenu">
+      <button mat-menu-item routerLink="facturacion/empresas" routerLinkActive="app-a_active">
+        <mat-icon>business</mat-icon>
+        <span>Mis empresas</span>
+      </button>
+      <button mat-menu-item routerLink="facturacion/profile" routerLinkActive="app-a_active">
+        <mat-icon>manage_accounts</mat-icon>
+        <span>Perfil de usuario</span>
+      </button>
+      <button mat-menu-item (click)="onSignOut()">
+        <mat-icon>exit_to_app</mat-icon>
+        <span>Cerrar sesión</span>
+      </button>
+    </mat-menu>
+  </div>
+</mat-toolbar>

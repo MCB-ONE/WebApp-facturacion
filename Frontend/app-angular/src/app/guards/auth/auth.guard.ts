@@ -1,16 +1,16 @@
 import { Injectable } from '@angular/core';
 import { filter, map, tap } from 'rxjs/operators';
-import { ActivatedRouteSnapshot, CanActivate, CanActivateChild, Route, Router, RouterStateSnapshot, UrlSegment, UrlTree } from "@angular/router";
+import { ActivatedRouteSnapshot, CanActivate, CanActivateChild, CanLoad, Route, Router, RouterStateSnapshot, UrlSegment, UrlTree } from "@angular/router";
 import { select, Store } from "@ngrx/store";
 import { Observable } from "rxjs";
-import * as fromRoot from '@app/store'
-import * as fromUsuario from '@app/store/usuario'
+import * as fromRoot from '@app/store';
+import * as fromUsuario from '@app/store/usuario';
 
 
 @Injectable({
   providedIn: 'root'
 })
-export class AuthGuard implements CanActivate, CanActivateChild {
+export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
 
   constructor(
     private router: Router,

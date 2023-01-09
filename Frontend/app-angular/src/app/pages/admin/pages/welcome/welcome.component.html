@@ -1,0 +1,4 @@
+<app-welcome-header></app-welcome-header>
+<ng-container *ngIf="empresas$ | async as empresas">
+  <app-empresas-table *ngIf="(empresas$ | async)  as empresas" [tableData]="empresas" (selectEmpresa)="onEmpresaSelect($event)"></app-empresas-table>
+</ng-container>

@@ -9,7 +9,7 @@ import { ControlsModule, DateModule, FormFieldModule, IndicatorsModule, InputMod
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { LineaFacturaFormModule } from './components/linea-factura-form/linea-factura-form.module';
-import { FacturaSummaryComponent } from './components/components/factura-summary/factura-summary.component';
+import { FacturaSummaryComponent } from './components/factura-summary/factura-summary.component';
 import { MatDividerModule } from '@angular/material/divider';
 import { FormModule } from '@app/store/factura/form/form.module';
 

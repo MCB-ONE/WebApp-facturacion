@@ -1,0 +1,17 @@
+<div class="app-dashboard">
+  <!-- Cliente nuevo o sin empresas creadas -->
+  <ng-container *ngIf="!(activeEmpresa$ | async)">
+    <div class="app-dashboard-main">
+      <app-active-empresa-header></app-active-empresa-header>
+    </div>
+  </ng-container>
+  <ng-container *ngIf="(activeEmpresa$ | async) as empresa">
+    <div class="app-dashboard-main">
+      <app-active-empresa-header [empresa]="empresa" title="Facturas de:"></app-active-empresa-header>
+      <ng-container *ngIf="facturasList">
+        <app-facturas-table *ngIf="facturasList.length > 0" [tableData]="facturasList"></app-facturas-table>
+        <button  *ngIf="facturasList.length == 0" mat-button mat-button mat-flat-button color="primary" routerLink="/facturacion/facturas/nueva">Primera factura</button>
+      </ng-container>
+    </div>
+  </ng-container>
+</div>
