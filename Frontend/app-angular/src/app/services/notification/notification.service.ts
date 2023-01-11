@@ -5,7 +5,8 @@ import { NotificationComponent } from './components';
 @Injectable()
 export class NotificationService {
 
-  constructor(private snackBar: MatSnackBar) { }
+  constructor(private snackBar: MatSnackBar) {
+  }
 
   error(message: string ): void{
     this.snackBar.openFromComponent(NotificationComponent, {

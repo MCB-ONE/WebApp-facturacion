@@ -23,6 +23,7 @@ export class LineasFacturaTableComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
+    console.log("TABLA LINEAS CREADA")
     this.lineasFacturaService.getAll();
     this.serviceSubscribe = this.lineasFacturaService.lineasFactura$.subscribe(res => {
       this.dataSource.data = res;

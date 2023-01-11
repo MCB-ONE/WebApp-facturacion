@@ -10,12 +10,12 @@ import { FormActions } from '@app/store/factura/form/form.actions';
 import { Store } from '@ngrx/store';
 import { LineafacturaService } from '../../services';
 import { LineaFacturaFormComponent } from '../linea-factura-form/linea-factura-form.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-modal-lineas-factura',
   templateUrl: './modal-lineas-factura.component.html',
-  styleUrls: ['./modal-lineas-factura.component.scss'],
-  providers: [ LineafacturaService ],
+  styleUrls: ['./modal-lineas-factura.component.scss']
 })
 export class ModalLineasFacturaComponent implements OnInit, OnDestroy {
 
@@ -23,7 +23,7 @@ export class ModalLineasFacturaComponent implements OnInit, OnDestroy {
   dataSource = new MatTableDataSource<any>([]);
   isLoaded: boolean = false;
 
-  private serviceSubscribe!: Subscription;
+  private serviceSubscribe$!: Subscription;
 
   constructor(public dialogRef: MatDialogRef<ModalLineasFacturaComponent>,
     @Inject(MAT_DIALOG_DATA) public data: Factura,
@@ -35,10 +35,9 @@ export class ModalLineasFacturaComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.lineasFacturaService.setInitial(this.data.lineasFactura);
 
-    this.serviceSubscribe = this.lineasFacturaService.lineasFactura$.subscribe(res => {
+    this.serviceSubscribe$ = this.lineasFacturaService.lineasFactura$.subscribe(res => {
       this.dataSource.data = res;
       this.isLoaded = true;
-
       console.log(res)
     })
   }
@@ -70,9 +69,14 @@ export class ModalLineasFacturaComponent implements OnInit, OnDestroy {
 
   onUpdate(): void {
     let lineasUpdate!: LineaFactura[];
-    this.lineasFacturaService.lineasFactura$.subscribe(res => {
+    this.serviceSubscribe$ = this.lineasFacturaService.lineasFactura$.subscribe(res => {
+      console.log(res);
       lineasUpdate = res;
     })
+    // this.lineasFacturaService.lineasFactura$.subscribe(res => {
+    //   console.log(res);
+    //   lineasUpdate = res;
+    // })
 
     this.store.dispatch(FormActions.updateLineasStart({
       facturaId: this.data.id,
@@ -86,7 +90,9 @@ export class ModalLineasFacturaComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.serviceSubscribe.unsubscribe();
+    console.log("MODAL LINEAS DESRTROY");
+    this.lineasFacturaService.clearService();
+    this.serviceSubscribe$.unsubscribe();
   }
 
 

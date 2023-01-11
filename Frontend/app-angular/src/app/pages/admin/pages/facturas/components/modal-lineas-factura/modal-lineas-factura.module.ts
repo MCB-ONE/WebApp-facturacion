@@ -8,7 +8,7 @@ import { MatTableModule } from '@angular/material/table';
 import { PipesModule } from '@app/pipes/pipes.module';
 import { LineasFacturaTableModule } from '../lineas-factura-table/lineas-factura-table.module';
 import { LineaFacturaFormModule } from '../linea-factura-form/linea-factura-form.module';
-import { LineafacturaService } from '../../services';
+import { NotificationService } from '@app/services';
 
 
 
@@ -26,6 +26,6 @@ import { LineafacturaService } from '../../services';
     LineasFacturaTableModule,
     LineaFacturaFormModule
   ],
-  providers: [ LineafacturaService ]
+  providers: [ NotificationService ]
 })
 export class ModalLineasFacturaModule { }

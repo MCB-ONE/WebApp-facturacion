@@ -54,7 +54,6 @@ export class FormEffects {
           .pipe(
             tap((factura: Factura) => {
               this.notificationService.success(`Líneas de la factura numero ${factura.numero} actualizadas.`)
-              this.router.navigate(['/facturacion/inicio'])
             }),
             map((factura: Factura) => FormActions.updateLineasSuccess({ factura }),
             ),

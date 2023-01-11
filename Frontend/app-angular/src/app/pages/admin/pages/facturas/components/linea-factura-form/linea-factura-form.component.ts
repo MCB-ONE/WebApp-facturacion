@@ -8,8 +8,7 @@ import { LineafacturaService } from '../../services';
 @Component({
   selector: 'app-linea-factura-form',
   templateUrl: './linea-factura-form.component.html',
-  styleUrls: ['./linea-factura-form.component.scss'],
-  providers: [ LineafacturaService ],
+  styleUrls: ['./linea-factura-form.component.scss']
 })
 export class LineaFacturaFormComponent implements OnInit {
 
