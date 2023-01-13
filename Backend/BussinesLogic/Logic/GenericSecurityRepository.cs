@@ -39,23 +39,6 @@ namespace BussinesLogic.Logic
 
         }
 
-        public async Task<T> GetByIdWithSpecAsync(ISpecification<T> spec)
-        {
-            _logger.LogWarning($"{nameof(GenericSecurityRepository<T>)} - {nameof(GetByIdWithSpecAsync)} - Warning Level Log");
-            _logger.LogError($"{nameof(GenericSecurityRepository<T>)} - {nameof(GetByIdWithSpecAsync)} - Error Level Log");
-            _logger.LogCritical($"{nameof(GenericSecurityRepository<T>)} - {nameof(GetByIdWithSpecAsync)} - Critical Log Level");
-            return await ApplySpecification(spec).FirstOrDefaultAsync();
-        }
-
-        public async Task<IReadOnlyList<T>> GetAllWithSpecAsync(ISpecification<T> spec)
-        {
-
-            _logger.LogWarning($"{nameof(GenericSecurityRepository<T>)} - {nameof(GetAllWithSpecAsync)} - Warning Level Log");
-            _logger.LogError($"{nameof(GenericSecurityRepository<T>)} - {nameof(GetAllWithSpecAsync)} - Error Level Log");
-            _logger.LogCritical($"{nameof(GenericSecurityRepository<T>)} - {nameof(GetAllWithSpecAsync)} - Critical Log Level");
-
-            return await ApplySpecification(spec).ToListAsync();
-        }
 
         public async Task<int> Add(T entity)
         {
@@ -100,16 +83,6 @@ namespace BussinesLogic.Logic
             _context.Set<T>().Remove(entity);
 
             return await _context.SaveChangesAsync();
-        }
-
-        private IQueryable<T> ApplySpecification(ISpecification<T> spec)
-        {
-            return SecuirtySpecificationEvaluator<T>.GetQuery(_context.Set<T>().AsQueryable(), spec);
-        }
-
-        public async Task<int> CountAsync(ISpecification<T> spec)
-        {
-            return await ApplySpecification(spec).CountAsync();
         }
     }
 }

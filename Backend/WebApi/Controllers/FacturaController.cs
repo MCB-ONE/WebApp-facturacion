@@ -6,7 +6,6 @@ using Core.Specifications.Factura;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
-using WebApi.Dtos;
 using WebApi.Dtos.FacturaDtos;
 
 namespace WebApi.Controllers
@@ -25,11 +24,11 @@ namespace WebApi.Controllers
 
         [HttpGet("empresa/{id}")]
         [Authorize]
-        public async Task<ActionResult<IReadOnlyList<FacturaDto>>> GetAllFacturasByEmpresaId(int id, [FromQuery] SpecificationParams facturaParams)
+        public async Task<ActionResult<IReadOnlyList<FacturaDto>>> GetAllFacturasByEmpresaId(int id)
         {
             var emailUsuario = HttpContext.User?.Claims?.FirstOrDefault(x => x.Type == ClaimTypes.Email)?.Value;
 
-            var spec = new FacturaSpecification(facturaParams, id);
+            var spec = new FacturaSpecification(id);
 
             var facturas = await _repository.GetAllWithSpecAsync(spec);
 
@@ -49,9 +48,7 @@ namespace WebApi.Controllers
         public async Task<ActionResult<FacturaDto>> GetFacturaById(int id)
         {
 
-            var spec = new FacturaSpecification(id);
-
-            var factura = await _repository.GetByIdWithSpecAsync(spec);
+            var factura = await _repository.GetByIdAsync(id);
 
             return Ok(_mapper.Map<FacturaDto>(factura));
         }

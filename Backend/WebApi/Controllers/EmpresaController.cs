@@ -24,7 +24,7 @@ namespace WebApi.Controllers
 
         [HttpGet]
         [Authorize]
-        public async Task<ActionResult<Pagination<EmpresaDto>>> GetAllEmpresasByUsuarioEmail([FromQuery] SpecificationParams empresaParams)
+        public async Task<ActionResult<Pagination<EmpresaDto>>> GetAllEmpresasByUsuarioEmail()
         {
             var emailUsuario = HttpContext.User?.Claims?.FirstOrDefault(x => x.Type == ClaimTypes.Email)?.Value;
             var isAdmin = HttpContext.User?.Claims?.FirstOrDefault(x => x.Type == ClaimTypes.Role)?.Value;
@@ -34,45 +34,17 @@ namespace WebApi.Controllers
             {
                 var allEmpresas = await _repository.GetAllAsync();
 
-                var totalAllEmpresas = allEmpresas.Count();
-
-                var allRounded = Math.Ceiling(Convert.ToDecimal(totalAllEmpresas / empresaParams.PageSize));
-                var allTotalPages = Convert.ToInt32(allRounded);
-
-                var allData = _mapper.Map<IReadOnlyList<Empresa>, IReadOnlyList<EmpresaDto>>(allEmpresas);
-
-                return Ok(new Pagination<EmpresaDto>
-                {
-                    Count = totalAllEmpresas,
-                    PageCount = allTotalPages,
-                    Data = allData,
-                    PageIndex = empresaParams.PageIndex,
-                    PageSize = empresaParams.PageSize
-                });
+                return Ok(allEmpresas);
             }
 
 
-            var spec = new EmpresaWithFacturasSpecification(emailUsuario, empresaParams);
+            var spec = new EmpresaWithFacturasSpecification(emailUsuario);
 
             var empresas = await _repository.GetAllWithSpecAsync(spec);
 
-            var specCount = new EmpresaForCountingSpecification(empresaParams, emailUsuario);
-
-            var totalEmpresas = await _repository.CountAsync(specCount);
-
-            var rounded = Math.Ceiling(Convert.ToDecimal(totalEmpresas / empresaParams.PageSize));
-            var totalPages = Convert.ToInt32(rounded);
-
             var data = _mapper.Map<IReadOnlyList<Empresa>, IReadOnlyList<EmpresaDto>>(empresas);
 
-            return Ok(new Pagination<EmpresaDto>
-            {
-                Count = totalEmpresas,
-                PageCount = totalPages,
-                Data = data,
-                PageIndex = empresaParams.PageIndex,
-                PageSize = empresaParams.PageSize
-            });
+            return Ok(data);
         }
 
         [HttpGet("{id}")]

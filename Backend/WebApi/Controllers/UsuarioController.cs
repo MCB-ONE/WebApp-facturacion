@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using Core.Entities;
 using Core.Interfaces;
-using Core.Specifications.Usuario;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -152,17 +151,10 @@ namespace WebApi.Controllers
         /// </summary>
         /// <returns></returns>
         [Authorize(Roles = "ADMIN")]
-        [HttpGet("pagination")]
-        public async Task<ActionResult<Pagination<UsuarioDto>>> GetUsuarios([FromQuery] UsuarioSpecificationParams usuarioParams)
+        [HttpGet]
+        public async Task<ActionResult<Pagination<UsuarioDto>>> GetUsuarios()
         {
-            var spec = new UsuarioSpecification(usuarioParams);
-            var usuarios = await _securityRepository.GetAllWithSpecAsync(spec);
-
-            var specCount = new UsuarioForCountingSpecification(usuarioParams);
-            var totalUsuarios = await _securityRepository.CountAsync(specCount);
-
-            var rounded = Math.Ceiling(Convert.ToDecimal(totalUsuarios) / Convert.ToDecimal(usuarioParams.PageSize));
-            var totalPages = Convert.ToInt32(rounded);
+            var usuarios = await _securityRepository.GetAllAsync();
 
             var data = _mapper.Map<IReadOnlyList<Usuario>, IReadOnlyList<UsuarioDto>>(usuarios);
 
@@ -172,15 +164,7 @@ namespace WebApi.Controllers
                 user.Admin = roles.Contains("ADMIN") ? true : false;
             }
 
-            return Ok(
-                new Pagination<UsuarioDto>
-                {
-                    Count = totalUsuarios,
-                    Data = data,
-                    PageCount = totalPages,
-                    PageIndex = usuarioParams.PageIndex,
-                    PageSize = usuarioParams.PageSize
-                });
+            return Ok(data);
         }
 
 
@@ -272,7 +256,7 @@ namespace WebApi.Controllers
         /// </summary>
         /// <returns></returns>
         [Authorize]
-        [HttpGet]
+        [HttpGet("recuperar")]
         public async Task<ActionResult<UsuarioDto>> GetUsuario()
         {
             // El token se pasa en los headers de la request, por eso el método no lo recive cómo parámetro
