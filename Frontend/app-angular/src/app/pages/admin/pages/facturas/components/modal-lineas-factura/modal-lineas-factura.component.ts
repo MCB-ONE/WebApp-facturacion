@@ -38,7 +38,6 @@ export class ModalLineasFacturaComponent implements OnInit, OnDestroy {
     this.serviceSubscribe$ = this.lineasFacturaService.lineasFactura$.subscribe(res => {
       this.dataSource.data = res;
       this.isLoaded = true;
-      console.log(res)
     })
   }
 
@@ -70,19 +69,19 @@ export class ModalLineasFacturaComponent implements OnInit, OnDestroy {
   onUpdate(): void {
     let lineasUpdate!: LineaFactura[];
     this.serviceSubscribe$ = this.lineasFacturaService.lineasFactura$.subscribe(res => {
-      console.log(res);
       lineasUpdate = res;
     })
-    // this.lineasFacturaService.lineasFactura$.subscribe(res => {
-    //   console.log(res);
-    //   lineasUpdate = res;
-    // })
+
+    this.lineasFacturaService.lineasFactura$.subscribe(res => {
+      lineasUpdate = res;
+    })
 
     this.store.dispatch(FormActions.updateLineasStart({
       facturaId: this.data.id,
       lineasFactura: lineasUpdate
     }))
-    this.onClose();
+
+    this.dialogRef.close(lineasUpdate);
   }
 
   onClose(): void {
@@ -90,7 +89,6 @@ export class ModalLineasFacturaComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    console.log("MODAL LINEAS DESRTROY");
     this.lineasFacturaService.clearService();
     this.serviceSubscribe$.unsubscribe();
   }

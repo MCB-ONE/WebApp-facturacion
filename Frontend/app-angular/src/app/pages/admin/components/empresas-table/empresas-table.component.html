@@ -1,6 +1,6 @@
 <mat-form-field class="table-filter">
   <mat-label>Filtrar facturas</mat-label>
-  <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Congelados Tarragona" #input>
+  <input class="table-filter"  matInput (keyup)="applyFilter($event)" placeholder="Ex. Congelados Tarragona" #input>
 </mat-form-field>
 
 <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort>

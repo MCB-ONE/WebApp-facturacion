@@ -12,8 +12,6 @@ export class LineafacturaService implements OnDestroy{
   lineasFactura: ILineaFacturaItem[] = [];
 
   constructor() {
-    console.log('SERVICIO INICIADO')
-    console.log(this.lineasFactura)
   }
 
   setInitial(lineas: LineaFactura[]) {
@@ -60,7 +58,6 @@ export class LineafacturaService implements OnDestroy{
     findElem!.precioUnitario = linea.precioUnitario;
     findElem!.totalLinea = linea.precioUnitario * linea.cantidad
     this.lineasFactura$.next(this.lineasFactura);
-    console.log(this.lineasFactura)
   }
 
   remove(id: number) {
@@ -84,7 +81,6 @@ export class LineafacturaService implements OnDestroy{
   }
 
   ngOnDestroy(): void {
-    console.log('SERVICIO INICIADO')
     this.lineasFactura = [];
     this.lineasFactura$.next([]);
   }

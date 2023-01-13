@@ -64,7 +64,9 @@ export class FacturasTableComponent implements OnInit, AfterViewInit {
 
 
     dialogRef.afterClosed().subscribe((data) => {
-      this.lineasFacturaService.lineasFactura = [];
+      if(data){
+        window.location.reload();
+      }
     });
   }
 

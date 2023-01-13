@@ -1,3 +1,4 @@
+import { MatButtonModule } from '@angular/material/button';
 import { EmpresasTableModule } from './components/empresas-table/empresas-table.module';
 import { ActiveEmpresaHeaderModule } from './../../components/active-empresa-header/active-empresa-header.module';
 import { NgModule } from '@angular/core';
@@ -17,7 +18,8 @@ import { ListModule } from '@app/store/empresa/list/list.module';
     EmpresasRoutingModule,
     ListModule,
     ActiveEmpresaHeaderModule,
-    EmpresasTableModule
+    EmpresasTableModule,
+    MatButtonModule
   ]
 })
 export class EmpresasModule { }
