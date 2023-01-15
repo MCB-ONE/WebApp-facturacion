@@ -3,6 +3,8 @@ using BussinesLogic.Data;
 using BussinesLogic.Logic;
 using Core.Entities;
 using Core.Interfaces;
+using DinkToPdf;
+using DinkToPdf.Contracts;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
@@ -115,6 +117,9 @@ builder.Services.AddScoped(typeof(IFacturaRepository), typeof(FacturaRepository)
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+// 10. Add PDF converter service
+builder.Services.AddSingleton(typeof(IConverter), new SynchronizedConverter(new PdfTools()));
 
 var app = builder.Build();
 

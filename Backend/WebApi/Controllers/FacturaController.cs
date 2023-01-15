@@ -7,6 +7,13 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 using WebApi.Dtos.FacturaDtos;
+using PdfSharpCore;
+using PdfSharpCore.Pdf;
+using TheArtOfDev.HtmlRenderer.PdfSharp;
+using System.Text;
+using WebApi.Utility;
+using DinkToPdf.Contracts;
+using DinkToPdf;
 
 namespace WebApi.Controllers
 {
@@ -14,13 +21,14 @@ namespace WebApi.Controllers
     {
         private readonly IMapper _mapper;
         private readonly IFacturaRepository _repository;
+        private readonly IConverter _converter;
 
-        public FacturaController(IMapper mapper, IFacturaRepository repository)
+        public FacturaController(IMapper mapper, IFacturaRepository repository, IConverter converter)
         {
             _mapper = mapper;
             _repository = repository;
+            _converter = converter;
         }
-
 
         [HttpGet("empresa/{id}")]
         [Authorize]
@@ -51,6 +59,50 @@ namespace WebApi.Controllers
             var factura = await _repository.GetByIdAsync(id);
 
             return Ok(_mapper.Map<FacturaDto>(factura));
+        }
+
+        [HttpGet("generarPDF/{id}")]
+        [Authorize]
+        public async Task<IActionResult> generarPDF(int id)
+        {
+            bool generateFlag = true;
+
+            var spec = new FacturaSpecification(id, generateFlag);
+
+            var factura = await _repository.GetByIdWithSpecAsync(spec);
+
+            var document = new PdfDocument();
+
+            var templateGenerator = new TemplateGenerator(factura);
+
+            var htmlContent = templateGenerator.GetHTMLString();
+
+            var globalSettings = new GlobalSettings
+            {
+                ColorMode = ColorMode.Color,
+                Orientation = Orientation.Portrait,
+                PaperSize = PaperKind.A4,
+                Margins = new MarginSettings { Top = 18, Bottom = 18 }
+            };
+
+            var objectSettings = new ObjectSettings
+            {
+                PagesCount = true,
+                HtmlContent = htmlContent,
+                WebSettings = { DefaultEncoding = "utf-8", UserStyleSheet = Path.Combine(Directory.GetCurrentDirectory(), "assets", "styles.css") },
+                HeaderSettings = { FontName = "Arial", FontSize = 9 },
+                FooterSettings = { FontName = "Arial", FontSize = 9 }
+            };
+
+            var pdf = new HtmlToPdfDocument()
+            {
+                GlobalSettings = globalSettings,
+                Objects = { objectSettings }
+            };
+
+            string Filename = "Factura_0" + factura.Numero + ".pdf";
+
+            return File(_converter.Convert(pdf), "application/pdf", Filename);
         }
 
         [HttpPost]
@@ -123,5 +175,6 @@ namespace WebApi.Controllers
             return Ok();
 
         }
+
     }
 }

@@ -15,5 +15,12 @@ namespace Core.Specifications.Factura
             AddInclude(factura => factura.LineasFactura);
 
         }
+
+        public FacturaSpecification(int facturaId, bool generateFlag) : base(x => x.Id == facturaId)
+        {
+            AddInclude(factura => factura.Empresa);
+            AddInclude(factura => factura.Cliente);
+            AddInclude(factura => factura.LineasFactura);
+        }
     }
 }
