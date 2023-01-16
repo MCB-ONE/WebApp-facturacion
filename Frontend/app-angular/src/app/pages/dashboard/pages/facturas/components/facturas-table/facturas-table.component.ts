@@ -1,3 +1,4 @@
+import { FacturaService } from './../../services/factura/factura.service';
 import { AfterViewInit, Component, Input, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
@@ -15,7 +16,7 @@ import { ModalLineasFacturaComponent } from '../modal-lineas-factura/modal-linea
 })
 export class FacturasTableComponent implements OnInit, AfterViewInit  {
 
-  displayedColumns = ['numero', 'fechaExpedicion', 'clienteNombre', 'clienteNif', 'subtotal', 'iva', 'total', 'lineasFactura'];
+  displayedColumns = ['numero', 'fechaExpedicion', 'clienteNombre', 'clienteNif', 'subtotal', 'iva', 'total', 'lineasFactura', 'action'];
   dataSource = new MatTableDataSource<any>([]);
 
   @ViewChild(MatPaginator, {static: false}) matPaginator!: MatPaginator | null;
@@ -24,7 +25,8 @@ export class FacturasTableComponent implements OnInit, AfterViewInit  {
 
   constructor(
     private dialog: MatDialog,
-    private lineasFacturaService: LineafacturaService
+    private lineasFacturaService: LineafacturaService,
+    private facturaService: FacturaService
     ) { }
 
   ngOnInit(): void {
@@ -58,7 +60,7 @@ export class FacturasTableComponent implements OnInit, AfterViewInit  {
 
   openDialog(factura: Factura): void {
     const dialogRef = this.dialog.open(ModalLineasFacturaComponent, {
-      width: '720px',
+      width: '1080px',
       data: factura
     });
 
@@ -66,6 +68,19 @@ export class FacturasTableComponent implements OnInit, AfterViewInit  {
     dialogRef.afterClosed().subscribe((data) => {
       this.lineasFacturaService.lineasFactura = [];
     });
+  }
+
+  facturaDownload(facturaId: number){
+    this.facturaService.GnerateFactura(facturaId).subscribe((res)=>{
+      let blob: Blob = res.body as Blob;
+      let url = window.URL.createObjectURL(blob);
+
+      let a = document.createElement('a');
+      a.download = "fact00"+facturaId.toString();
+      a.href = url;
+      a.click();
+
+    })
   }
 
 }

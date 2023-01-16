@@ -27,7 +27,12 @@
       </ng-container>
       <ng-container *ngSwitchCase="'lineasFactura'">
         <td mat-cell *matCellDef="let row">
-          <mat-icon (click)="openDialog(row)"> expand_circle_down</mat-icon>
+          Ver detalle<mat-icon (click)="openDialog(row)"> expand_circle_down</mat-icon>
+        </td>
+      </ng-container>
+      <ng-container *ngSwitchCase="'action'">
+        <td mat-cell *matCellDef="let row">
+          Descargar<mat-icon (click)="facturaDownload(row.id)"> cloud_download</mat-icon>
         </td>
       </ng-container>
       <ng-container *ngSwitchDefault>

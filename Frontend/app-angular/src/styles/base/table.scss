@@ -4,10 +4,11 @@
   margin-top: 1rem;
   box-shadow: 0px 2px 1px -1px rgb(0 0 0 / 5%), 0px 1px 1px 0px rgb(0 0 0 / 4%), 0px 1px 3px 0px rgb(0 0 0 / 8%);
   .mat-icon {
-    margin-left: 2rem;
-    color: $primary;
+    margin-left: 8px;
+    color: #5366de;
     cursor: pointer;
     transition: color 0.1s ease;
+    vertical-align: bottom;
     &:hover{
       color: $primary-light;
     }

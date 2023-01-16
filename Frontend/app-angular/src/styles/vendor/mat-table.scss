@@ -1,3 +1,7 @@
 .mat-table{
   margin-bottom: 2rem;
+  &__text-overflow {
+    max-width: 280px;
+    padding-right: 2rem !important;
+  }
 }

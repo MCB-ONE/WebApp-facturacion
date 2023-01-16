@@ -1,7 +1,10 @@
     <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
       <ng-container matColumnDef="concepto">
         <th mat-header-cell *matHeaderCellDef> Concepto </th>
-        <td mat-cell *matCellDef="let element"> {{element.concepto}} </td>
+        <td class="mat-table__text-overflow" mat-cell *matCellDef="let element">
+          <span >
+            {{element.concepto}} </span>
+        </td>
       </ng-container>
       <ng-container matColumnDef="precioUnitario">
         <th mat-header-cell *matHeaderCellDef> Precio Unitario </th>

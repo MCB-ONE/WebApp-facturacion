@@ -1,3 +1,4 @@
+import { FacturaService } from './../../services/factura/factura.service';
 import { MatDialogModule } from '@angular/material/dialog';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -30,6 +31,7 @@ import { PipesModule } from '@app/pipes/pipes.module';
   ],
   exports:[
     FacturasTableComponent
-  ]
+  ],
+  providers: [FacturaService]
 })
 export class FacturasTableModule { }
