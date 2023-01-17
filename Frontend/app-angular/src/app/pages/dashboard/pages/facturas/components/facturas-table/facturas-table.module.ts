@@ -1,3 +1,5 @@
+import { ModalFacturaPdfModule } from './../modal-factura-pdf/modal-factura-pdf.module';
+import { MatButtonModule } from '@angular/material/button';
 import { FacturaService } from './../../services/factura/factura.service';
 import { MatDialogModule } from '@angular/material/dialog';
 import { NgModule } from '@angular/core';
@@ -24,10 +26,12 @@ import { PipesModule } from '@app/pipes/pipes.module';
     MatFormFieldModule,
     MatInputModule,
     MatSortModule,
+    MatButtonModule,
     MatIconModule,
     MatMenuModule,
     MatDialogModule,
-    PipesModule
+    PipesModule,
+    ModalFacturaPdfModule
   ],
   exports:[
     FacturasTableComponent

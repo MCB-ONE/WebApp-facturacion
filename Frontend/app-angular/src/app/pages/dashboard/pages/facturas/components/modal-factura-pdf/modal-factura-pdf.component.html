@@ -1,0 +1,15 @@
+<div mat-dialog-content>
+  <ngx-extended-pdf-viewer
+  [height]="'90vh'"
+  [src]="pdfUrl"
+  [useBrowserLocale]="true"
+  [showToolbar]="false"
+  [textLayer]="true"
+  [showDownloadButton]="false"
+  ></ngx-extended-pdf-viewer>
+
+</div>
+<div mat-dialog-actions>
+  <button mat-button mat-dialog-close cdkFocusInitial (click)="onDownload()">Imprimir</button>
+  <button mat-button mat-dialog-close (click)="onClose()">Cerrar</button>
+</div>

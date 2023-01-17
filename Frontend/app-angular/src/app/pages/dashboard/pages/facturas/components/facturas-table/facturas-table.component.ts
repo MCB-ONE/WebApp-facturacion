@@ -1,3 +1,4 @@
+import { ModalFacturaPdfComponent } from './../modal-factura-pdf/modal-factura-pdf.component';
 import { FacturaService } from './../../services/factura/factura.service';
 import { AfterViewInit, Component, Input, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
@@ -16,8 +17,9 @@ import { ModalLineasFacturaComponent } from '../modal-lineas-factura/modal-linea
 })
 export class FacturasTableComponent implements OnInit, AfterViewInit  {
 
-  displayedColumns = ['numero', 'fechaExpedicion', 'clienteNombre', 'clienteNif', 'subtotal', 'iva', 'total', 'lineasFactura', 'action'];
+  displayedColumns = ['numero', 'fechaExpedicion', 'clienteNombre', 'clienteNif', 'subtotal', 'iva', 'total', 'lineasFactura', 'acciones'];
   dataSource = new MatTableDataSource<any>([]);
+  pdfUrl = '';
 
   @ViewChild(MatPaginator, {static: false}) matPaginator!: MatPaginator | null;
   @ViewChild(MatSort, {static: false}) sort!: MatSort;
@@ -70,16 +72,33 @@ export class FacturasTableComponent implements OnInit, AfterViewInit  {
     });
   }
 
+  facturaPreview(facturaId: number){
+    this.facturaService.GnerateFactura(facturaId).subscribe((res)=>{
+      let blob: Blob = res.body as Blob;
+      let url = window.URL.createObjectURL(blob);
+      this.pdfUrl = url;
+
+      const dialogRef = this.dialog.open(ModalFacturaPdfComponent, {
+        width: '1080px',
+        data:  this.pdfUrl
+      });
+
+      dialogRef.afterClosed().subscribe((data) => {
+        if(data){
+          this.facturaDownload(facturaId);
+        }
+      });
+    })
+  }
+
   facturaDownload(facturaId: number){
     this.facturaService.GnerateFactura(facturaId).subscribe((res)=>{
       let blob: Blob = res.body as Blob;
       let url = window.URL.createObjectURL(blob);
-
       let a = document.createElement('a');
       a.download = "fact00"+facturaId.toString();
       a.href = url;
       a.click();
-
     })
   }
 
