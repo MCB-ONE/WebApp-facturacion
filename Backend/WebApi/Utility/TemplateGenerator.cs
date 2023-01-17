@@ -31,9 +31,9 @@ namespace WebApi.Utility
                         <div id='invoice'> 
                             <h2>FACTURA #{0}</h2>
                             <div><span>FECHA EXPEDICIÓN</span> {1}</div>
-                            <div><span>TOTAL</span> {2}</div>
+                            <div><span>TOTAL</span> {2}€</div>
                         </div>
-                    </header>", factura.Numero, factura.FechaExpedicion, factura.Total.ToString("0,0.000"));
+                    </header>", factura.Numero, factura.FechaExpedicion.ToString("d"), factura.Total.ToString("0,0.000"));
 
             sb.AppendFormat(@"
                     <div id='address' class='clearfix'>
