@@ -8,6 +8,7 @@
   - [Back-end](#back-end-1)
   - [Front-end](#front-end-1)
 - [Uso](#uso)
+  - [Credenciales](#credenciales)
   
 # Descripción general
 Proyecto Full-stack para la gestión de facturas. En la parte del servidor he desarrollado una API Rest desarrollada con .NET 6 y en del cliente se ha desarrollado una SPA (Single Page Application) con Angular.
@@ -35,6 +36,7 @@ En cuanto a la estructura de la aplicación SPA hay que destacar las siguientes 
 * JWT para sistema de autenticación
 * Entity Framework como ORM
 * Mapper para el mapeo de entidades
+* Swagger para documentar los puntos finales de la API
 ## Front-end
 * Visual Studio
 * Angular CLI v14
@@ -50,4 +52,12 @@ dotnet run --project .\BuberDinner.Api\
 Para ejecutar la aplicación web de Angular ejecuta el siguiente comando.
 ```
 ng run start:dev
+```
+## Credenciales
+Para poder acceder al panel de administración como usuario de prueba puedes utilizar estas credenciales:
+```json
+{
+  "email": "usuario.test@gmail.com",
+  "password": "UsuarioTest1234$"
+}
 ```
