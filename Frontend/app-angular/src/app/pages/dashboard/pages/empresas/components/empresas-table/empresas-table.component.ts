@@ -16,6 +16,7 @@ export class EmpresasTableComponent implements OnInit, AfterViewInit {
   displayedColumns = ['nombre', 'nif', 'dirección', 'telefono', 'email', 'acciones'];
   dataSource = new MatTableDataSource<any>([]);
   @Output() selectEmpresa: EventEmitter<number>
+  @Output() removeEmpresa: EventEmitter<number>
 
   @ViewChild(MatPaginator, { static: false }) matPaginator!: MatPaginator | null;
   @ViewChild(MatSort, { static: false }) sort!: MatSort;
@@ -23,6 +24,7 @@ export class EmpresasTableComponent implements OnInit, AfterViewInit {
 
   constructor() {
     this.selectEmpresa = new EventEmitter();
+    this.removeEmpresa = new EventEmitter();
   }
 
   ngAfterViewInit(): void {
@@ -41,8 +43,12 @@ export class EmpresasTableComponent implements OnInit, AfterViewInit {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
-  onSelected(empresaId: number) {
+  onSelected(empresaId: number ){
     this.selectEmpresa.emit(empresaId);
+  }
+
+  onRemove(empresaId: number ){
+    this.removeEmpresa.emit(empresaId);
   }
 
 }

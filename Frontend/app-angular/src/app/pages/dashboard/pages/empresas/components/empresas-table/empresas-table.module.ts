@@ -10,6 +10,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatDialogModule } from '@angular/material/dialog';
 import { PipesModule } from '@app/pipes/pipes.module';
 import { EmpresasTableComponent } from './empresas-table.component';
+import { RouterLink } from '@angular/router';
 
 
 
@@ -19,6 +20,7 @@ import { EmpresasTableComponent } from './empresas-table.component';
   ],
   imports: [
     CommonModule,
+    RouterLink,
     MatTableModule,
     MatPaginatorModule,
     MatFormFieldModule,

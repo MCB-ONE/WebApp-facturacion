@@ -8,7 +8,7 @@
   <ng-container *ngIf="(activeEmpresa$ | async) as empresa">
     <div class="app-dashboard-main">
       <app-active-empresa-header [empresa]="empresa" title="Administrando"></app-active-empresa-header>
-      <app-empresas-table *ngIf="(empresas$ | async)  as empresas" [tableData]="empresas"></app-empresas-table>
+      <app-empresas-table *ngIf="(empresas$ | async)  as empresas" [tableData]="empresas" (selectEmpresa)="onEmpresaSelect($event)"></app-empresas-table>
       <button mat-button mat-button mat-flat-button color="primary" routerLink="/facturacion/empresas/nueva">Nueva empresa</button>
     </div>
   </ng-container>
